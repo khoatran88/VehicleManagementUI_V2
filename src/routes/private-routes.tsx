@@ -7,19 +7,14 @@ export function privateRoutes(): RouteObject[] {
       path: '/',
       element: <RequireAuth />,
       children: [
+        { path: '', element: <Navigate to="dashboard" replace /> },
         {
           path: 'dashboard',
           element: <DashboardLayout />,
-          children: [
-            {
-              index: true,
-              element: <Navigate to="dashboard" />,
-            },
-            {
-              path: 'vehicle-mannager',
-              element: <VehicleManager />,
-            },
-          ],
+        },
+        {
+          path: 'vehicle-mannager',
+          element: <VehicleManager />,
         },
       ],
     },

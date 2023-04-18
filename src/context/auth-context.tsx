@@ -36,6 +36,12 @@ export const useAuthContext = () => {
 
   const queryClient = useQueryClient()
 
+  const [authTokenInLocalStorage, setAuthTokenInLocalStorage] =
+    useLocalStorageState('authToken', '')
+
+  const [refreshTokenInLocalStorage, setRefreshTokenInLocalStorage] =
+    useLocalStorageState('refreshToken', '')
+
   const setTokens = (authToken: string, refreshToken: string) => {
     setAuthTokenInLocalStorage(authToken)
     setRefreshTokenInLocalStorage(refreshToken)
@@ -48,10 +54,18 @@ export const useAuthContext = () => {
 
   const clearCache = () => queryClient.clear()
 
+  const signIn = useCallback(
+    (response: any) => {
+      setTokens(response.data.accessToken, response.data.refreshToken)
+      dispatch({ isLoggedIn: true })
+    },
+    [authTokenInLocalStorage, refreshTokenInLocalStorage]
+  )
+
   const signOut = useCallback(() => {
-    resetToken()
-    clearCache()
-    dispatch(initialState)
+    return dispatch({
+      isLoggedIn: true,
+    })
   }, [resetToken, clearCache])
 
   useEffect(() => {
@@ -61,29 +75,24 @@ export const useAuthContext = () => {
     }
   })
 
-  const [authTokenInLocalStorage, setAuthTokenInLocalStorage] =
-    useLocalStorageState('authToken', '')
-
-  const [refreshTokenInLocalStorage, setRefreshTokenInLocalStorage] =
-    useLocalStorageState('refreshToken', '')
-
   useEffect(() => {
-    if (!authTokenInLocalStorage) {
+    if (!authTokenInLocalStorage && state.isLoggedIn !== true) {
       resetToken()
       clearCache()
-    }
-    if (authTokenInLocalStorage) {
-      console.log('have token')
+    } else {
       return dispatch({
         isLoggedIn: true,
       })
     }
-    return dispatch(initialState)
-  }, [authTokenInLocalStorage])
+    return dispatch({
+      initialState,
+    })
+  }, [authTokenInLocalStorage, dispatch])
 
   return {
     state,
     setTokens,
+    signIn,
     signOut,
     isLoggedIn: state.isLoggedIn,
     authToken: authTokenInLocalStorage,
