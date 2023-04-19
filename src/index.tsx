@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client'
 import './styles/index.css'
 import { QueryClientProvider, QueryClient } from 'react-query'
 import { BrowserRouter } from 'react-router-dom'
+import { ReactQueryDevtools } from 'react-query/devtools'
 import App from './App'
 import reportWebVitals from './reportWebVitals'
 import { AuthProvider } from './context'
@@ -13,6 +14,7 @@ const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
+      <ReactQueryDevtools initialIsOpen={false} />
       <BrowserRouter>
         <AuthProvider>
           <App />
