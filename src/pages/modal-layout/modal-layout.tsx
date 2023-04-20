@@ -22,89 +22,133 @@ export default function ModalLayout({
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <div className="container row justify-content-center">
-          <div className="col-6">
+        <div className="row">
+          <div className="col-12">
             <div className="row">
-              <img src={anh1} alt="none" />
-            </div>
-            <div className="row justify-content-center">
-              <img className="col-3" src={anh1} alt="none" />
-              <img className="col-3" src={anh1} alt="none" />
-              <img className="col-3" src={anh1} alt="none" />
-            </div>
-          </div>
-          <div className="col-4">
-            <div className="col col-9">
-              <div className="row pb-2">
-                <div className="col-6">
-                  <h6>Plate Number:</h6>
-                </div>
-                <div className="col-6">
-                  <input type="text" placeholder="Plate Number" />
+              <div className="col-6">
+                <div className="row">
+                  <div className="col-12 text-center">
+                    <img src={anh1} alt="none" />
+                  </div>
+                  <div className="col-12 text-center">
+                    <img className="col-3" src={anh1} alt="none" />
+                    <img className="col-3" src={anh1} alt="none" />
+                    <img className="col-3" src={anh1} alt="none" />
+                  </div>
                 </div>
               </div>
-              <div className="row pb-2">
-                <div className="col-6">
-                  <h6>Brand:</h6>
-                </div>
-                <div className="col-6">
-                  <input type="text" placeholder="Brand" />
-                </div>
-              </div>
-              <div className="row pb-2">
-                <div className="col-6">
-                  <h6>Model:</h6>
-                </div>
-                <div className="col-6">
-                  <input type="text" placeholder="Model" />
-                </div>
-              </div>
-              <div className="row pb-2">
-                <div className="col-6">
-                  <h6>Model:</h6>
-                </div>
-                <div className="col-6">
-                  <input type="text" placeholder="Model" />
-                </div>
-              </div>
-              <div className="row pb-2">
-                <div className="col-6">
-                  <h6>Model:</h6>
-                </div>
-                <div className="col-6">
-                  <input type="text" placeholder="Model" />
-                </div>
-              </div>
-              <div className="row pb-2">
-                <div className="col-6">
-                  <h6>PurchsedDate:</h6>
-                </div>
-                <div className="col-6">
-                  <input type="text" placeholder="PurchsedDate" />
-                </div>
-              </div>
-              <div className="row pb-2">
-                <div className="col-6">
-                  <h6>Gross Mass:</h6>
-                </div>
-                <div className="col-6">
-                  <input type="text" placeholder="Gross Mass" />
-                </div>
-              </div>
-              <div className="row pb-2">
-                <div className="col-6">
-                  <h6>Dimension:</h6>
-                </div>
-                <div className="col-6">
-                  <input type="text" placeholder="Dimension" />
-                </div>
-              </div>
-              <div className="row pb-2">
-                <div className="col-6">
-                  <h6>Brake Type:</h6>
-                </div>
-                <div className="col-6">
-                  <input type="text" placeholder="Manual" />
+              <div className="col-6">
+                <div className="row">
+                  <div className="col-12">
+                    <div className="row pb-2">
+                      <div className="col-6">
+                        <h6>Plate Number:</h6>
+                      </div>
+                      <div className="col-6">
+                        <input
+                          className="form-control"
+                          type="text"
+                          placeholder="Plate Number"
+                        />
+                      </div>
+                    </div>
+                    <div className="row pb-2">
+                      <div className="col-6">
+                        <h6>Brand:</h6>
+                      </div>
+                      <div className="col-6">
+                        <input
+                          className="form-control"
+                          type="text"
+                          placeholder="Password"
+                        />
+                      </div>
+                    </div>
+                    <div className="row pb-2">
+                      <div className="col-6">
+                        <h6>Model:</h6>
+                      </div>
+                      <div className="col-6">
+                        <input
+                          className="form-control"
+                          type="text"
+                          placeholder="Model"
+                        />
+                      </div>
+                    </div>
+                    <div className="row pb-2">
+                      <div className="col-6">
+                        <h6>Model:</h6>
+                      </div>
+                      <div className="col-6">
+                        <input
+                          className="form-control"
+                          type="text"
+                          placeholder="Model"
+                        />
+                      </div>
+                    </div>
+                    <div className="row pb-2">
+                      <div className="col-6">
+                        <h6>Model:</h6>
+                      </div>
+                      <div className="col-6">
+                        <input
+                          className="form-control"
+                          type="text"
+                          placeholder="Model"
+                        />
+                      </div>
+                    </div>
+                    <div className="row pb-2">
+                      <div className="col-6">
+                        <h6>PurchsedDate:</h6>
+                      </div>
+                      <div className="col-6">
+                        <input
+                          className="form-control"
+                          type="text"
+                          placeholder="PurchsedDate"
+                        />
+                      </div>
+                    </div>
+                    <div className="row pb-2">
+                      <div className="col-6">
+                        <h6>Gross Mass:</h6>
+                      </div>
+                      <div className="col-6">
+                        <input
+                          className="form-control"
+                          type="text"
+                          placeholder="Gross Mass"
+                        />
+                      </div>
+                    </div>
+                    <div className="row pb-2">
+                      <div className="col-6">
+                        <h6>Dimension:</h6>
+                      </div>
+                      <div className="col-6">
+                        <input
+                          className="form-control"
+                          type="text"
+                          placeholder="Dimension"
+                        />
+                      </div>
+                    </div>
+                    <div className="row pb-2">
+                      <div className="col-6">
+                        <h6>Brake Type:</h6>
+                      </div>
+                      <div className="col-6">
+                        <input
+                          className="form-control"
+                          type="text"
+                          placeholder="Manual"
+                        />
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
