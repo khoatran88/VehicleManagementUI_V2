@@ -1,12 +1,15 @@
 import { Modal } from 'react-bootstrap'
 import anh1 from 'src/asset/images/logo-merc.jpg'
+import { Vehicle } from 'src/types'
 
 export default function ModalLayout({
   show,
   onHide,
+  data,
 }: {
   show: boolean
   onHide: any
+  data: Vehicle
 }) {
   if (!show) return null
   return (
@@ -49,6 +52,7 @@ export default function ModalLayout({
                           className="form-control"
                           type="text"
                           placeholder="Plate Number"
+                          defaultValue={data?.plateNumber}
                         />
                       </div>
                     </div>
@@ -61,6 +65,7 @@ export default function ModalLayout({
                           className="form-control"
                           type="text"
                           placeholder="Password"
+                          defaultValue={data?.brand}
                         />
                       </div>
                     </div>
@@ -73,30 +78,33 @@ export default function ModalLayout({
                           className="form-control"
                           type="text"
                           placeholder="Model"
+                          defaultValue={data?.model}
                         />
                       </div>
                     </div>
                     <div className="row pb-2">
                       <div className="col-6">
-                        <h6>Model:</h6>
+                        <h6>Color:</h6>
                       </div>
                       <div className="col-6">
                         <input
                           className="form-control"
                           type="text"
                           placeholder="Model"
+                          defaultValue={data?.color}
                         />
                       </div>
                     </div>
                     <div className="row pb-2">
                       <div className="col-6">
-                        <h6>Model:</h6>
+                        <h6>Type:</h6>
                       </div>
                       <div className="col-6">
                         <input
                           className="form-control"
                           type="text"
                           placeholder="Model"
+                          defaultValue={data.type}
                         />
                       </div>
                     </div>
@@ -109,6 +117,7 @@ export default function ModalLayout({
                           className="form-control"
                           type="text"
                           placeholder="PurchsedDate"
+                          defaultValue={data?.purchasedDate}
                         />
                       </div>
                     </div>
@@ -121,6 +130,7 @@ export default function ModalLayout({
                           className="form-control"
                           type="text"
                           placeholder="Gross Mass"
+                          defaultValue={data?.grossMass}
                         />
                       </div>
                     </div>
@@ -133,6 +143,7 @@ export default function ModalLayout({
                           className="form-control"
                           type="text"
                           placeholder="Dimension"
+                          defaultValue={data?.dimension}
                         />
                       </div>
                     </div>
@@ -145,6 +156,7 @@ export default function ModalLayout({
                           className="form-control"
                           type="text"
                           placeholder="Manual"
+                          defaultValue={data?.type}
                         />
                       </div>
                     </div>

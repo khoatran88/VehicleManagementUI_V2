@@ -1,11 +1,18 @@
 import { Suspense, useState } from 'react'
 import { Outlet } from 'react-router-dom'
 import { SmallSpinner } from 'src/components'
-import ModalLayout from '../modal-layout/modal-layout'
+import { useVehicle } from 'src/hooks/vehicle'
+import { Vehicle } from 'src/types'
+import { ModalLayout } from '../modal-layout'
 
 export default function DashboardLayout() {
   const [modalShow, setModalShow] = useState(false)
-  const handleClose = () => setModalShow(false)
+  const { data } = useVehicle().then((item: Vehicle) => {
+    return { item }
+  })
+
+  console.log(data)
+
   return (
     <div className="grow px-8 py-5 sm:px-20">
       <Suspense fallback={<SmallSpinner />}>
@@ -18,7 +25,11 @@ export default function DashboardLayout() {
       >
         Edit Vehicle
       </button>
-      <ModalLayout show={modalShow} onHide={handleClose} />
+      <ModalLayout
+        show={modalShow}
+        onHide={() => setModalShow(false)}
+        data={data}
+      />
     </div>
   )
 }
