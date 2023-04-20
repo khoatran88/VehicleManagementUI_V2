@@ -64,7 +64,7 @@ export const useAuthContext = () => {
 
   const signOut = useCallback(() => {
     return dispatch({
-      isLoggedIn: true,
+      isLoggedIn: false,
     })
   }, [resetToken, clearCache])
 
