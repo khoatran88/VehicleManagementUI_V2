@@ -1,20 +1,28 @@
 import React, { useState, useEffect } from 'react'
 import { useAuthContext } from 'src/context'
 import { useSignIn } from 'src/hooks/auth'
-import logo1 from 'src/asset/images/logo-merc.jpg'
 import { useNavigate } from 'react-router-dom'
+import {
+  Box,
+  Button,
+  Checkbox,
+  CssBaseline,
+  FormControlLabel,
+  Grid,
+  Paper,
+  TextField,
+  Typography,
+} from '@mui/material'
+import logo1 from 'src/asset/images/logo-merc.jpg'
 
 export default function Login() {
   const [user, setUser] = useState('')
   const [pwd, setPwd] = useState('')
-  const [errMsg, setErrMsg] = useState('')
   const { setTokens } = useAuthContext()
   const { signIn, isLoggedIn } = useAuthContext()
   const navigate = useNavigate()
 
-  useEffect(() => {
-    setErrMsg('')
-  }, [user, pwd])
+  useEffect(() => {}, [user, pwd])
 
   const { mutate: handleSignIn } = useSignIn()
   useEffect(() => {
@@ -40,70 +48,78 @@ export default function Login() {
   }
 
   return (
-    <div className="grid h-screen w-full grid-cols-1 sm:grid-cols-2">
-      <div className="hidden bg-sky-700 sm:block">
-        <div className="h-full w-full bg-sky-700 object-cover">aaa</div>
-        <p className={errMsg ? 'errmsg' : 'offscreen'} aria-live="assertive">
-          {errMsg}
-        </p>
-      </div>
-      <div className="flex flex-col justify-center">
-        <form
-          className="mx-auto w-full max-w-[400px]"
-          onSubmit={(e) => handleSubmit(e)}
+    <Grid container sx={{ height: '100vh' }}>
+      <CssBaseline />
+      <Grid item xs={false} sm={4} md={6} sx={{ backgroundColor: '#0552B5' }} />
+      <Grid item xs={12} sm={8} md={6} component={Paper} elevation={6} square>
+        <Box
+          sx={{
+            my: 30,
+            mx: 4,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
         >
-          <div className="flex w-full items-center justify-center">
-            <img src={logo1} alt="LOGO" />
-          </div>
-          <h1 className="py-7 text-center text-[20px] font-bold dark:text-blue-800">
+          <Box
+            component="img"
+            sx={{
+              height: 233,
+              width: 350,
+              maxHeight: { xs: 233, md: 167 },
+              maxWidth: { xs: 350, md: 250 },
+            }}
+            alt="The house from the offer."
+            src={logo1}
+          />
+          <Typography component="h1" variant="h5" sx={{ color: '#2186EB' }}>
             Wellcome To TNG Vehicle Management
-          </h1>
-          <div className="pb-5">
-            <label htmlFor="username" className="flex flex-col">
-              Username
-              <input
-                className="mt-2 rounded-lg border-x border-blue-800 p-2 focus:border-blue-500 focus:outline-none"
-                type="text"
-                id="username"
-                autoComplete="off"
-                onChange={(e) => setUser(e.target.value)}
-                value={user}
-                required
-              />
-            </label>
-          </div>
-
-          <div className="pb-5">
-            <label htmlFor="password" className="flex flex-col">
-              Password
-              <input
-                className="mt-2 rounded-lg border-blue-800 p-2 focus:border-blue-500 focus:outline-none"
-                type="password"
-                id="password"
-                onChange={(e) => setPwd(e.target.value)}
-                value={pwd}
-                required
-              />
-            </label>
-          </div>
-
-          <div className="flex justify-between pb-5">
-            <div className="remember-me">
-              <p className="flex items-center">
-                <input className="mr-2" type="checkbox" /> Remember me
-              </p>
-            </div>
-            <h4>Recover password</h4>
-          </div>
-
-          <button
-            className="w-full rounded-lg bg-blue-500 p-3 shadow-lg"
-            type="submit"
+          </Typography>
+          <Box
+            component="form"
+            noValidate
+            onSubmit={(e) => handleSubmit(e)}
+            sx={{ mt: 1 }}
           >
-            Sign In
-          </button>
-        </form>
-      </div>
-    </div>
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="email"
+              label="Email Address"
+              name="email"
+              autoComplete="email"
+              autoFocus
+              onChange={(e) => setUser(e.target.value)}
+              value={user}
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              name="password"
+              label="Password"
+              type="password"
+              id="password"
+              autoComplete="current-password"
+              onChange={(e) => setPwd(e.target.value)}
+              value={pwd}
+            />
+            <FormControlLabel
+              control={<Checkbox value="remember" color="primary" />}
+              label="Remember me"
+            />
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+            >
+              Sign In
+            </Button>
+          </Box>
+        </Box>
+      </Grid>
+    </Grid>
   )
 }
