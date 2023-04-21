@@ -1,7 +1,9 @@
-// import { getVehicleById } from 'src/api/routes'
+import { useQuery } from 'react-query'
+import { queryKeys } from 'src/api/query-keys'
+import { getVehicleById } from 'src/api/routes'
 
-export const useVehicle = async () => {
-  //   const a = await getVehicleById()
-  //   const vehicle = a
-  //   return vehicle
+export default function useVehicle() {
+  return {
+    ...useQuery([queryKeys.getVehicle], () => getVehicleById(), {}),
+  }
 }
