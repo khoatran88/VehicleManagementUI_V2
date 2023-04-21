@@ -18,4 +18,20 @@ export type VehicleId = {
   vehicleId: string
 }
 
+export interface Vehicle2 {
+  Id?: string
+  PlateNumber?: string
+  Brand?: string
+  Model?: string
+  EngineNumber?: string
+  ChassisNumber?: string
+  Color?: string
+  Type?: string
+  ProductionYear?: number
+  ProductionCountry?: string
+  LifetimeLimitTo?: number
+  PurchasedDate?: Date
+  LastInspectionDate?: Date
+}
+
 export type VehicleList = [vehicles: Vehicle]
