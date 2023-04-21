@@ -10,9 +10,6 @@ export default function Login() {
   const { setTokens } = useAuthContext()
   const { signIn, isLoggedIn } = useAuthContext()
   const navigate = useNavigate()
-
-  useEffect(() => { }, [user, pwd])
-
   const { mutate: handleSignIn } = useSignIn()
   useEffect(() => {
     if (isLoggedIn) {
@@ -38,18 +35,13 @@ export default function Login() {
 
   return (
     <div className="d-flex vh-100">
-      <div className="bg-primary bg-gradient col">
-        <p className={errMsg ? 'errmsg' : 'offscreen'} aria-live="assertive">
-          {errMsg}
-        </p>
-      </div>
       <div className="d-flex justify-content-center col">
         <form
           className="m-auto w-full max-w-[400px]"
           onSubmit={(e) => handleSubmit(e)}
         >
           <div className="d-flex w-100 align-items-center justify-content-center">
-            <img src={logo1} alt="LOGO" />
+            <img src="logo192.png" alt="LOGO" />
           </div>
           <h1 className="p-4 text-center fs-4 fw-bold">
             Wellcome To TNG Vehicle Management
