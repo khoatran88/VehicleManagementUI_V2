@@ -1,6 +1,7 @@
-import { getVehicleById } from 'src/api/routes'
+// import { getVehicleById } from 'src/api/routes'
 
 export const useVehicle = async () => {
-  const a = await getVehicleById()
-  return a.data.data
+  //   const a = await getVehicleById()
+  //   const vehicle = a
+  //   return vehicle
 }

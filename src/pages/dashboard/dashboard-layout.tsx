@@ -1,15 +1,14 @@
 import { Suspense, useState } from 'react'
 import { Outlet } from 'react-router-dom'
 import { SmallSpinner } from 'src/components'
-import { useVehicle } from 'src/hooks/vehicle'
-import { Vehicle } from 'src/types'
+// import { useVehicle } from 'src/hooks/vehicle'
+import { getVehicleById } from 'src/api/routes'
 import { ModalLayout } from '../modal-layout'
 
 export default function DashboardLayout() {
   const [modalShow, setModalShow] = useState(false)
-  const { data } = useVehicle().then((item: Vehicle) => {
-    return { item }
-  })
+  // const data = useVehicle()
+  const data = getVehicleById()
 
   console.log(data)
 
