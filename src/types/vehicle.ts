@@ -12,6 +12,8 @@ export interface Vehicle {
   purchasedDate?: string
   lastInspectionDate?: string
   lastUpdatedDate?: string
+  grossMass?: string
+  dimension?: string
 }
 
 export type VehicleId = {

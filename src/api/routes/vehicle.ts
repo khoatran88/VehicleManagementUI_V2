@@ -1,4 +1,6 @@
 import { Vehicle } from 'src/types'
+import { api } from '../axios-base-instance'
+import { apiUrl } from '../api-paths'
 
 export default function GetVehicle() {
   const vehicle: Vehicle = {
@@ -17,4 +19,10 @@ export default function GetVehicle() {
     lastInspectionDate: '2020-01-01T00:00:00',
   }
   return vehicle
+}
+
+export const getVehicleById = async () => {
+  const { data } = await api.get(apiUrl.vehicle.getVehicleDetail)
+
+  return data.data
 }

@@ -1,5 +1,6 @@
 import { Modal } from 'react-bootstrap'
 import anh1 from 'src/asset/images/logo-merc.jpg'
+import { Vehicle } from 'src/types'
 
 export default function ModalLayout({
   show,
@@ -8,10 +9,9 @@ export default function ModalLayout({
 }: {
   show: boolean
   onHide: any
-  data: any
+  data: Vehicle
 }) {
   if (!show) return null
-  console.log(data)
   return (
     <Modal
       show={show}
