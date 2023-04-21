@@ -1,14 +1,17 @@
 export interface Vehicle {
-  data: any
   plateNumber?: string
   brand?: string
   model?: string
+  engineNumber?: string
+  chassisNumber?: string
   color?: string
   type?: string
+  productionYear?: number
+  productionCountry?: string
+  lifetimeLimitTo?: number
   purchasedDate?: string
-  grossMass?: string
-  dimension?: string
-  brackType?: string
+  lastInspectionDate?: string
+  lastUpdatedDate?: string
 }
 
 export type VehicleId = {
