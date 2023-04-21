@@ -2,8 +2,8 @@ import { Suspense, useState } from 'react'
 import { Outlet } from 'react-router-dom'
 import { SmallSpinner } from 'src/components'
 import { useVehicle } from 'src/hooks/vehicle'
-import { TableLayout } from '../vehicle-manager/table-layout'
 import { ModalLayout } from '../modal-layout'
+import { VehicleManager } from '../vehicle-manager'
 
 export default function DashboardLayout() {
   const [modalShow, setModalShow] = useState(false)
@@ -14,7 +14,7 @@ export default function DashboardLayout() {
       <Suspense fallback={<SmallSpinner />}>
         <Outlet />
       </Suspense>
-      <TableLayout />
+      <VehicleManager />
       <button
         type="button"
         className="btn btn-primary"
