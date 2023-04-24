@@ -7,7 +7,3 @@ export function useVehicle() {
     ...useQuery([queryKeys.getVehicle], () => VehicleActions.getVehicleById(), {}),
   }
 }
-
-export function fetchVehicles(PageNumber: number, PageSize: number) {
-  return { ...useQuery([queryKeysVehicle.getVehicles], () => VehicleActions.fetchVehicles(PageNumber, PageSize), {}) }
-}

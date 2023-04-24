@@ -13,6 +13,8 @@ interface VehicleManagerProps {
 
 type VehicleManagerState = {
   modalShow: boolean
+  pageNumber: number
+  pageSize: number
 };
 
 export default class VehicleManager extends Component<VehicleManagerProps, VehicleManagerState> {
@@ -22,13 +24,16 @@ export default class VehicleManager extends Component<VehicleManagerProps, Vehic
 
   constructor(props: VehicleManagerProps) {
     super(props);
-    this.state = { modalShow: false };
+    this.state = {
+      modalShow: false,
+      pageNumber: 1,
+      pageSize: 20
+    };
     this.dataVH = GetVehicle()
-
   }
 
   async componentDidMount() {
-    this.vehicles = await this.fetchVehicles(1, 1)
+    this.vehicles = (await this.fetchVehicles(this.state.pageNumber, this.state.pageSize)).data as VehicleVM[]
   }
 
   async fetchVehicles(PageNumber: number, PageSize: number) {

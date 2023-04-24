@@ -1,6 +1,7 @@
 import { VehicleVM } from 'src/types'
 import { api } from '../axios-base-instance'
 import { apiUrl } from '../api-paths'
+import { PagedResponse } from 'src/types/response'
 
 export default function GetVehicle() {
   const vehicle: VehicleVM = {
@@ -18,13 +19,11 @@ export default function GetVehicle() {
   return vehicle
 }
 
-export const fetchVehicles = async (PageNumber: number, PageSize: number): Promise<VehicleVM[]> => {
-  let data: VehicleVM[] = []
+export const fetchVehicles = async (PageNumber: number, PageSize: number): Promise<PagedResponse> => {
+  let data: PagedResponse = {}
   await api.get(`${apiUrl.vehicle.getVehicles}?PageNumber=${PageNumber}&PageSize=${PageSize}`)
     .then((response) => {
-      if (response) {
-        data = response.data.data;
-      }
+      if (response.status) data = response.data;
     })
   return data;
 }
