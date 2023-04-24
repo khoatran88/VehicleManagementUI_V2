@@ -1,1 +1,1 @@
-export { default as useVehicle } from './useVehicle'
+export * as UseVehicle from './useVehicle'

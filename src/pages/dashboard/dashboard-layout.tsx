@@ -1,13 +1,13 @@
 import { Suspense, useState } from 'react'
 import { Outlet } from 'react-router-dom'
 import { SmallSpinner } from 'src/components'
-import { useVehicle } from 'src/hooks/vehicle'
+import { UseVehicle } from 'src/hooks/vehicle'
 import { ModalLayout } from '../modal-layout'
 import { VehicleManager } from '../vehicle-manager'
 
 export default function DashboardLayout() {
   const [modalShow, setModalShow] = useState(false)
-  const vehicleData = useVehicle()
+  const vehicleData = UseVehicle.useVehicle()
 
   return (
     <div className="grow px-8 py-5 sm:px-20">

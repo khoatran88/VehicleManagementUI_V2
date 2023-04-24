@@ -1,9 +1,9 @@
-import { Vehicle, Vehicle2 } from 'src/types'
+import { VehicleVM } from 'src/types'
 import { api } from '../axios-base-instance'
 import { apiUrl } from '../api-paths'
 
 export default function GetVehicle() {
-  const vehicle: Vehicle = {
+  const vehicle: VehicleVM = {
     plateNumber: '51L-2323.5',
     brand: 'Toyotas',
     model: 'Innova',
@@ -14,15 +14,23 @@ export default function GetVehicle() {
     productionYear: 2017,
     productionCountry: 'Japan',
     lifetimeLimitTo: 2037,
-    purchasedDate: '2020-01-01T00:00:00',
-    lastUpdatedDate: '2020-01-01T00:00:00',
-    lastInspectionDate: '2020-01-01T00:00:00',
   }
   return vehicle
 }
 
-export const fetchDetail = async (id: string): Promise<Vehicle2> => {
-  let data: Vehicle2 = {}
+export const fetchVehicles = async (PageNumber: number, PageSize: number): Promise<VehicleVM[]> => {
+  let data: VehicleVM[] = []
+  await api.get(`${apiUrl.vehicle.getVehicles}?PageNumber=${PageNumber}&PageSize=${PageSize}`)
+    .then((response) => {
+      if (response) {
+        data = response.data.data;
+      }
+    })
+  return data;
+}
+
+export const fetchDetail = async (id: string): Promise<VehicleVM> => {
+  let data: VehicleVM = {}
   await api.get(`${apiUrl.vehicle.getVehicleDetail}?${id}`)
     .then((response) => {
       if (response) {

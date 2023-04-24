@@ -1,8 +1,12 @@
 import { Component } from 'react'
 import GetVehicle from 'src/api/routes/vehicle';
-import { Vehicle } from 'src/types';
+import { VehicleVM } from 'src/types';
+import { UseVehicle } from 'src/hooks/vehicle'
+import { useQuery } from 'react-query'
 import { TableLayout } from './table-layout';
 import { ModalLayout } from '../modal-layout';
+import { queryKeysVehicle } from 'src/api';
+import * as VehicleActions from 'src/api/routes'
 
 interface VehicleManagerProps {
 }
@@ -12,12 +16,24 @@ type VehicleManagerState = {
 };
 
 export default class VehicleManager extends Component<VehicleManagerProps, VehicleManagerState> {
-  dataVH: Vehicle = {}
+  dataVH: VehicleVM = {}
+
+  vehicles: VehicleVM[] = []
 
   constructor(props: VehicleManagerProps) {
     super(props);
     this.state = { modalShow: false };
     this.dataVH = GetVehicle()
+
+  }
+
+  async componentDidMount() {
+    this.vehicles = await this.fetchVehicles(1, 1)
+  }
+
+  async fetchVehicles(PageNumber: number, PageSize: number) {
+    var rs = await VehicleActions.fetchVehicles(PageNumber, PageSize);
+    return rs
   }
 
   setModalShow = (data: boolean) => {
@@ -27,13 +43,13 @@ export default class VehicleManager extends Component<VehicleManagerProps, Vehic
   render() {
     const { modalShow } = this.state;
     return (
-      < div className="cointainer" >
-        <div className="row">
-          <div className="col-12 px-5">
+      < div className="container-fluid">
+        <div className="row px-5">
+          <div className="col-12">
             <button className="btn btn-primary" type="button" onClick={() => this.setModalShow(true)}>Add New</button>
           </div>
-          <div className="col-12 p-5">
-            <TableLayout />
+          <div className="col-12">
+            <TableLayout vehicles={this.vehicles} />
           </div>
         </div>
         <ModalLayout show={modalShow} onHide={() => this.setModalShow(false)} data={this.dataVH} />

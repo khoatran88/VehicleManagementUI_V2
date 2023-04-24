@@ -1,6 +1,6 @@
 import { Modal } from 'react-bootstrap'
 import anh1 from 'src/asset/images/logo-merc.jpg'
-import { Vehicle } from 'src/types'
+import { VehicleVM } from 'src/types'
 
 export default function ModalLayout({
   show,
@@ -9,7 +9,7 @@ export default function ModalLayout({
 }: {
   show: boolean
   onHide: any
-  data: Vehicle
+  data: VehicleVM
 }) {
   if (!show) return null
   return (
@@ -108,7 +108,7 @@ export default function ModalLayout({
                         />
                       </div>
                     </div>
-                    <div className="row pb-2">
+                    {/* <div className="row pb-2">
                       <div className="col-6">
                         <h6>PurchsedDate:</h6>
                       </div>
@@ -117,11 +117,11 @@ export default function ModalLayout({
                           className="form-control"
                           type="text"
                           placeholder="PurchsedDate"
-                          defaultValue={data?.purchasedDate}
+                          defaultValue={data?.PurchasedDate}
                         />
                       </div>
-                    </div>
-                    <div className="row pb-2">
+                    </div> */}
+                    {/* <div className="row pb-2">
                       <div className="col-6">
                         <h6>Gross Mass:</h6>
                       </div>
@@ -133,8 +133,8 @@ export default function ModalLayout({
                           defaultValue={data?.grossMass}
                         />
                       </div>
-                    </div>
-                    <div className="row pb-2">
+                    </div> */}
+                    {/* <div className="row pb-2">
                       <div className="col-6">
                         <h6>Dimension:</h6>
                       </div>
@@ -143,10 +143,10 @@ export default function ModalLayout({
                           className="form-control"
                           type="text"
                           placeholder="Dimension"
-                          defaultValue={data?.dimension}
+                          defaultValue={data?.Dimension}
                         />
                       </div>
-                    </div>
+                    </div> */}
                     <div className="row pb-2">
                       <div className="col-6">
                         <h6>Brake Type:</h6>
