@@ -2,27 +2,29 @@ import React, { useState, useEffect } from 'react'
 import { useAuthContext } from 'src/context'
 import { useSignIn } from 'src/hooks/auth'
 import logo1 from 'src/asset/images/logo-merc.jpg'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { Button } from 'react-bootstrap'
+import { UserInfo } from 'src/types'
 
 export default function Login() {
   const [user, setUser] = useState('')
   const [pwd, setPwd] = useState('')
   const [errMsg, setErrMsg] = useState('')
-  const { setTokens } = useAuthContext()
-  const { signIn, isLoggedIn } = useAuthContext()
+  const { login, isLoggedIn } = useAuthContext()
   const navigate = useNavigate()
+  const location = useLocation()
 
   useEffect(() => {
     setErrMsg('')
   }, [user, pwd])
 
-  const { mutate: handleSignIn } = useSignIn()
   useEffect(() => {
     if (isLoggedIn) {
-      navigate('/', { replace: true })
+      navigate(location.state?.from || '/dashboard', { replace: true })
     }
-  }, [isLoggedIn])
+  }, [isLoggedIn, navigate, location.state])
+
+  const { mutate: handleSignIn } = useSignIn()
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -30,8 +32,10 @@ export default function Login() {
       { userName: user, password: pwd },
       {
         onSuccess: (response) => {
-          setTokens(response.data.accessToken, response.data.refreshToken)
-          signIn(response)
+          const userInfo: UserInfo = {
+            userName: user,
+          }
+          login(response.data, userInfo)
         },
         onError: (error: any) => {
           console.log(error)

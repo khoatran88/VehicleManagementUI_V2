@@ -11,7 +11,6 @@ instance.interceptors.request.use(
         const header = config.headers
         header.Authorization = `Bearer ${JSON.parse(token)}`
         header.Accept = 'application/json'
-        header.common['Accept-Language'] = 'en'
       }
     }
     return config
@@ -24,7 +23,7 @@ instance.interceptors.response.use(
   (error) => {
     if (error) {
       window.localStorage.removeItem('authToken')
-      window.location.reload()
+      // window.location.reload()
     }
     return Promise.reject(error)
   }

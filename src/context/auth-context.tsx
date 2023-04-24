@@ -9,18 +9,21 @@ import {
 } from 'react'
 import { useQueryClient } from 'react-query'
 import { useLocalStorageState } from 'src/hooks'
-import { AuthContextState } from 'src/types'
+import { AuthContextState, AuthTokens, UserInfo } from 'src/types'
 
 const AuthContext = createContext<any>(null)
 
 const initialState: AuthContextState = {
   isLoggedIn: false,
+  user: undefined,
+  authToken: undefined,
+  refreshToken: undefined,
 }
 
 const authContextReducer = (
   state: AuthContextState,
   payload: Partial<AuthContextState>
-) => ({ ...state, ...payload })
+) => ({ ...initialState, ...state, ...payload })
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [state, dispatch] = useReducer(authContextReducer, initialState)
@@ -30,9 +33,12 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
 export const useAuthContext = () => {
   const context = useContext(AuthContext)
-  const { state, dispatch } = context
 
-  if (context === undefined) throw new Error(`${t('error.withinAuthProvider')}`)
+  if (context === undefined) {
+    throw new Error(`${t('error.withinAuthProvider')}`)
+  }
+
+  const { state, dispatch } = context
 
   const queryClient = useQueryClient()
 
@@ -42,58 +48,56 @@ export const useAuthContext = () => {
   const [refreshTokenInLocalStorage, setRefreshTokenInLocalStorage] =
     useLocalStorageState('refreshToken', '')
 
-  const setTokens = (authToken: string, refreshToken: string) => {
+  const setTokens = useCallback((authToken: string, refreshToken: string) => {
     setAuthTokenInLocalStorage(authToken)
     setRefreshTokenInLocalStorage(refreshToken)
-  }
+  }, [])
 
-  const resetToken = () => {
-    localStorage.removeItem('authToken')
-    localStorage.removeItem('refreshToken')
-  }
+  const setUser = useCallback((user: UserInfo) => {
+    dispatch({ user })
+  }, [])
 
-  const clearCache = () => queryClient.clear()
-
-  const signIn = useCallback(
-    (response: any) => {
-      setTokens(response.data.accessToken, response.data.refreshToken)
-      dispatch({ isLoggedIn: true })
+  const login = useCallback(
+    (tokens: AuthTokens, user: UserInfo) => {
+      return new Promise<void>((resolve) => {
+        setTokens(tokens.accessToken, tokens.refreshToken)
+        setUser(user)
+        dispatch({ isLoggedIn: true })
+        resolve()
+      })
     },
-    [authTokenInLocalStorage, refreshTokenInLocalStorage]
+    [setTokens, setUser]
   )
 
-  const signOut = useCallback(() => {
-    return dispatch({
-      isLoggedIn: false,
-    })
-  }, [resetToken, clearCache])
+  const logout = useCallback(() => {
+    setTokens('', '')
+    dispatch({ isLoggedIn: false, user: null })
+    queryClient.clear()
+  }, [setTokens, queryClient])
 
   useEffect(() => {
     if (localStorage.getItem('authToken') === '') {
-      resetToken()
-      clearCache()
+      setTokens('', '')
+      dispatch({ isLoggedIn: false, user: null })
+      queryClient.clear()
     }
-  })
+  }, [setTokens, queryClient])
 
   useEffect(() => {
     if (!authTokenInLocalStorage && state.isLoggedIn !== true) {
-      resetToken()
-      clearCache()
+      setTokens('', '')
+      dispatch({ isLoggedIn: false, user: null })
+      queryClient.clear()
     } else {
-      return dispatch({
-        isLoggedIn: true,
-      })
+      dispatch({ isLoggedIn: true })
     }
-    return dispatch({
-      initialState,
-    })
-  }, [authTokenInLocalStorage, dispatch])
+  }, [authTokenInLocalStorage, setTokens, state.isLoggedIn, queryClient])
 
   return {
     state,
     setTokens,
-    signIn,
-    signOut,
+    login,
+    logout,
     isLoggedIn: state.isLoggedIn,
     authToken: authTokenInLocalStorage,
     refreshToken: refreshTokenInLocalStorage,

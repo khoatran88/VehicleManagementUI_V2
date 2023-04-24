@@ -1,5 +1,5 @@
 import { Navigate, RouteObject } from 'react-router-dom'
-import { DashboardLayout, Login, RequireAuth, VehicleManager } from 'src/pages'
+import { DashboardLayout, RequireAuth, VehicleManager } from 'src/pages'
 
 export function privateRoutes(): RouteObject[] {
   const privateRoutes: RouteObject[] = [
@@ -17,10 +17,6 @@ export function privateRoutes(): RouteObject[] {
           element: <VehicleManager />,
         },
       ],
-    },
-    {
-      path: 'login',
-      element: <Login />,
     },
   ]
 
