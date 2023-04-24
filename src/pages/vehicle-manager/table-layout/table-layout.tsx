@@ -9,7 +9,6 @@ export default function TableLayout({ vehicles }: { vehicles: VehicleVM[] }) {
         <table className="table">
           <thead>
             <tr>
-              <th scope="col">STT</th>
               <th scope="col">Plate Number</th>
               <th scope="col">Brand</th>
               <th scope="col">Model</th>
@@ -25,7 +24,6 @@ export default function TableLayout({ vehicles }: { vehicles: VehicleVM[] }) {
           <tbody>
             {vehicles.map((data =>
               <tr key={data.id}>
-                <th scope="row">1</th>
                 <td>{data.plateNumber}</td>
                 <td>{data.brand}</td>
                 <td>{data.model}</td>
