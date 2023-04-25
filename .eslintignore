@@ -2,3 +2,6 @@
 *.svg
 *.config.js
 config-overrides.js
+*.html
+*.ts
+*.tsx
