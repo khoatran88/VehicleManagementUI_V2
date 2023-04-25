@@ -1,21 +1,30 @@
 import React, { useState, useEffect } from 'react'
 import { useAuthContext } from 'src/context'
 import { useSignIn } from 'src/hooks/auth'
-import { useNavigate } from 'react-router-dom'
+import logo1 from 'src/asset/images/logo-merc.jpg'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { Button } from 'react-bootstrap'
+import { UserInfo } from 'src/types'
 
 export default function Login() {
   const [user, setUser] = useState('')
   const [pwd, setPwd] = useState('')
-  const { setTokens } = useAuthContext()
-  const { signIn, isLoggedIn } = useAuthContext()
+  const [errMsg, setErrMsg] = useState('')
+  const { login, isLoggedIn } = useAuthContext()
   const navigate = useNavigate()
-  const { mutate: handleSignIn } = useSignIn()
+  const location = useLocation()
+
+  useEffect(() => {
+    setErrMsg('')
+  }, [user, pwd])
+
   useEffect(() => {
     if (isLoggedIn) {
-      navigate('/', { replace: true })
+      navigate(location.state?.from || '/dashboard', { replace: true })
     }
-  }, [isLoggedIn])
+  }, [isLoggedIn, navigate, location.state])
+
+  const { mutate: handleSignIn } = useSignIn()
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -23,8 +32,10 @@ export default function Login() {
       { userName: user, password: pwd },
       {
         onSuccess: (response) => {
-          setTokens(response.data.accessToken, response.data.refreshToken)
-          signIn(response)
+          const userInfo: UserInfo = {
+            userName: user,
+          }
+          login(response.data, userInfo)
         },
         onError: (error: any) => {
           console.log(error)
@@ -35,13 +46,18 @@ export default function Login() {
 
   return (
     <div className="d-flex vh-100">
+      <div className="bg-primary bg-gradient col">
+        <p className={errMsg ? 'errmsg' : 'offscreen'} aria-live="assertive">
+          {errMsg}
+        </p>
+      </div>
       <div className="d-flex justify-content-center col">
         <form
           className="m-auto w-full max-w-[400px]"
           onSubmit={(e) => handleSubmit(e)}
         >
           <div className="d-flex w-100 align-items-center justify-content-center">
-            <img src="logo192.png" alt="LOGO" />
+            <img src={logo1} alt="LOGO" />
           </div>
           <h1 className="p-4 text-center fs-4 fw-bold">
             Wellcome To TNG Vehicle Management

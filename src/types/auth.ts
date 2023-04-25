@@ -2,12 +2,20 @@ export type LoginType = {
   userName: string
   password: string
 }
-export type AuthType = {
+
+export type AuthTokens = {
   accessToken: string
   refreshToken: string
   success: boolean
 }
 
-export interface AuthContextState {
+export type AuthContextState = {
   isLoggedIn: boolean
+  user?: UserInfo
+  authToken?: string
+  refreshToken?: string
+}
+
+export type UserInfo = {
+  userName?: string
 }
