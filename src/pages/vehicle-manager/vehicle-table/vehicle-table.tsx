@@ -1,8 +1,9 @@
-import { Pagination } from 'react-bootstrap'
+import { useState } from 'react';
+import { PaginationControl } from 'react-bootstrap-pagination-control';
 import { VehicleVM } from 'src/types'
 
-export default function TableLayout({ vehicles }: { vehicles: VehicleVM[] }) {
-
+export default function VechicleTable({ vehicles }: { vehicles: VehicleVM[] }) {
+  const [page, setPage] = useState(1)
   return (
     <div className="row">
       <div className="col-12">
@@ -48,16 +49,17 @@ export default function TableLayout({ vehicles }: { vehicles: VehicleVM[] }) {
             ))}
           </tbody>
         </table>
-        <Pagination>
-          <Pagination.First />
-          <Pagination.Prev />
-          <Pagination.Item active>{1}</Pagination.Item>
-          <Pagination.Item>{2}</Pagination.Item>
-          <Pagination.Item>{3}</Pagination.Item>
-
-          <Pagination.Next />
-          <Pagination.Last />
-        </Pagination>
+        <PaginationControl
+          page={page}
+          between={4}
+          total={250}
+          limit={20}
+          changePage={(page) => {
+            setPage(page); 
+            console.log(page)
+          }}
+          ellipsis={1}
+          />
       </div>
     </div>
   )

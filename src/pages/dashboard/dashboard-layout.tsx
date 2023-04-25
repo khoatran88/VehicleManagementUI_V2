@@ -2,7 +2,7 @@ import { Suspense, useState } from 'react'
 import { Outlet } from 'react-router-dom'
 import { SmallSpinner } from 'src/components'
 import { UseVehicle } from 'src/hooks/vehicle'
-import { ModalLayout } from '../modal-layout'
+import { VehicleCreateEdit } from '../vehicle-manager/vehicle-create-edit'
 import { VehicleManager } from '../vehicle-manager'
 
 export default function DashboardLayout() {
@@ -22,7 +22,7 @@ export default function DashboardLayout() {
       >
         Edit Vehicle
       </button>
-      <ModalLayout
+      <VehicleCreateEdit
         show={modalShow}
         onHide={() => setModalShow(false)}
         data={vehicleData.data}

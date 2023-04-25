@@ -1,12 +1,9 @@
 import { Component } from 'react'
 import GetVehicle from 'src/api/routes/vehicle';
 import { VehicleVM } from 'src/types';
-import { UseVehicle } from 'src/hooks/vehicle'
-import { useQuery } from 'react-query'
-import { TableLayout } from './table-layout';
-import { ModalLayout } from '../modal-layout';
-import { queryKeysVehicle } from 'src/api';
+import { VechicleTable } from './vehicle-table';
 import * as VehicleActions from 'src/api/routes'
+import VehicleCreateEdit from './vehicle-create-edit/vehicle-create-edit';
 
 interface VehicleManagerProps {
 }
@@ -54,10 +51,10 @@ export default class VehicleManager extends Component<VehicleManagerProps, Vehic
             <button className="btn btn-primary" type="button" onClick={() => this.setModalShow(true)}>Add New</button>
           </div>
           <div className="col-12">
-            <TableLayout vehicles={this.vehicles} />
+            <VechicleTable vehicles={this.vehicles} />
           </div>
         </div>
-        <ModalLayout show={modalShow} onHide={() => this.setModalShow(false)} data={this.dataVH} />
+        <VehicleCreateEdit show={modalShow} onHide={() => this.setModalShow(false)} data={this.dataVH} />
       </div >
     )
   }

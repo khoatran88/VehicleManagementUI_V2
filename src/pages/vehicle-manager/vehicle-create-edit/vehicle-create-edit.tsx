@@ -2,7 +2,7 @@ import { Modal } from 'react-bootstrap'
 import anh1 from 'src/asset/images/logo-merc.jpg'
 import { VehicleVM } from 'src/types'
 
-export default function ModalLayout({
+export default function VehicleCreateEdit({
   show,
   onHide,
   data,
@@ -84,6 +84,32 @@ export default function ModalLayout({
                     </div>
                     <div className="row pb-2">
                       <div className="col-6">
+                        <h6>Engine Number:</h6>
+                      </div>
+                      <div className="col-6">
+                        <input
+                          className="form-control"
+                          type="text"
+                          placeholder="Engine Number"
+                          defaultValue={data?.engineNumber}
+                        />
+                      </div>
+                    </div>
+                    <div className="row pb-2">
+                      <div className="col-6">
+                        <h6>Chassis Number:</h6>
+                      </div>
+                      <div className="col-6">
+                        <input
+                          className="form-control"
+                          type="text"
+                          placeholder="Chassis Number"
+                          defaultValue={data?.chassisNumber}
+                        />
+                      </div>
+                    </div>
+                    <div className="row pb-2">
+                      <div className="col-6">
                         <h6>Color:</h6>
                       </div>
                       <div className="col-6">
@@ -104,59 +130,46 @@ export default function ModalLayout({
                           className="form-control"
                           type="text"
                           placeholder="Model"
-                          defaultValue={data.type}
+                          defaultValue={data?.type}
                         />
                       </div>
                     </div>
-                    {/* <div className="row pb-2">
-                      <div className="col-6">
-                        <h6>PurchsedDate:</h6>
-                      </div>
-                      <div className="col-6">
-                        <input
-                          className="form-control"
-                          type="text"
-                          placeholder="PurchsedDate"
-                          defaultValue={data?.PurchasedDate}
-                        />
-                      </div>
-                    </div> */}
-                    {/* <div className="row pb-2">
-                      <div className="col-6">
-                        <h6>Gross Mass:</h6>
-                      </div>
-                      <div className="col-6">
-                        <input
-                          className="form-control"
-                          type="text"
-                          placeholder="Gross Mass"
-                          defaultValue={data?.grossMass}
-                        />
-                      </div>
-                    </div> */}
-                    {/* <div className="row pb-2">
-                      <div className="col-6">
-                        <h6>Dimension:</h6>
-                      </div>
-                      <div className="col-6">
-                        <input
-                          className="form-control"
-                          type="text"
-                          placeholder="Dimension"
-                          defaultValue={data?.Dimension}
-                        />
-                      </div>
-                    </div> */}
                     <div className="row pb-2">
                       <div className="col-6">
-                        <h6>Brake Type:</h6>
+                        <h6>Production Year:</h6>
                       </div>
                       <div className="col-6">
                         <input
                           className="form-control"
                           type="text"
-                          placeholder="Manual"
-                          defaultValue={data?.type}
+                          placeholder="Production Year"
+                          defaultValue={data?.productionYear}
+                        />
+                      </div>
+                    </div>
+                    <div className="row pb-2">
+                      <div className="col-6">
+                        <h6>Production Country:</h6>
+                      </div>
+                      <div className="col-6">
+                        <input
+                          className="form-control"
+                          type="text"
+                          placeholder="Production Country"
+                          defaultValue={data?.productionCountry}
+                        />
+                      </div>
+                    </div>
+                    <div className="row pb-2">
+                      <div className="col-6">
+                        <h6>Life Time Limit To:</h6>
+                      </div>
+                      <div className="col-6">
+                        <input
+                          className="form-control"
+                          type="text"
+                          placeholder="Life Time Limit To"
+                          defaultValue={data?.lifetimeLimitTo}
                         />
                       </div>
                     </div>
