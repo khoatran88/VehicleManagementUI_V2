@@ -11,7 +11,6 @@ export default function VehicleCreateEdit({
   onHide: any
   data: VehicleVM
 }) {
-  if (!show) return null
   return (
     <Modal
       show={show}
@@ -43,6 +42,19 @@ export default function VehicleCreateEdit({
               <div className="col-6">
                 <div className="row">
                   <div className="col-12">
+                  <div className="row pb-2">
+                      <div className="col-6">
+                        <h6>Id:</h6>
+                      </div>
+                      <div className="col-6">
+                        <input
+                          className="form-control"
+                          type="text"
+                          placeholder="Id"
+                          defaultValue={data?.id}
+                        />
+                      </div>
+                    </div>
                     <div className="row pb-2">
                       <div className="col-6">
                         <h6>Plate Number:</h6>

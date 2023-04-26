@@ -15,18 +15,6 @@ export default function DashboardLayout() {
         <Outlet />
       </Suspense>
       <VehicleManager />
-      <button
-        type="button"
-        className="btn btn-primary"
-        onClick={() => setModalShow(true)}
-      >
-        Edit Vehicle
-      </button>
-      <VehicleCreateEdit
-        show={modalShow}
-        onHide={() => setModalShow(false)}
-        data={vehicleData.data}
-      />
     </div>
   )
 }

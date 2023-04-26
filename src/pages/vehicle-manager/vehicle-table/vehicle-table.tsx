@@ -1,15 +1,26 @@
-import { useState } from 'react';
-import { PaginationControl } from 'react-bootstrap-pagination-control';
+import { useRef, useState } from 'react'
+import { PaginationControl } from 'react-bootstrap-pagination-control'
 import { VehicleVM } from 'src/types'
+import { VehicleCreateEdit } from '../vehicle-create-edit'
 
-export default function VechicleTable({ vehicles }: { vehicles: VehicleVM[] }) {
-  const [page, setPage] = useState(1)
+export default function VechicleTable({
+  vehicles,
+  handleGetData,
+  pageNumber,
+}: {
+  vehicles: VehicleVM[]
+  handleGetData: any
+  pageNumber: number
+}) {
+
+  const handleClickPagnation = handleGetData
   return (
     <div className="row">
       <div className="col-12">
         <table className="table">
           <thead>
             <tr>
+              <th scope="col">Id</th>
               <th scope="col">Plate Number</th>
               <th scope="col">Brand</th>
               <th scope="col">Model</th>
@@ -23,8 +34,9 @@ export default function VechicleTable({ vehicles }: { vehicles: VehicleVM[] }) {
             </tr>
           </thead>
           <tbody>
-            {vehicles.map((data =>
+            {vehicles.map((data) => (
               <tr key={data.id}>
+                <td>{data.id}</td>
                 <td>{data.plateNumber}</td>
                 <td>{data.brand}</td>
                 <td>{data.model}</td>
@@ -35,31 +47,22 @@ export default function VechicleTable({ vehicles }: { vehicles: VehicleVM[] }) {
                 <td>{data.productionYear}</td>
                 <td>{data.lifetimeLimitTo}</td>
                 <td>
-                  <button
-                    type="button"
-                    className="btn btn-primary pl-5"
-                  >
-                    Edit Vehicle
-                  </button>
-                  <button type="button" className="btn btn-primary">
-                    Delete
-                  </button>
+                <button type="button"className="btn btn-primary" > Edit Vehicle </button>
+                <button type="button" className="btn btn-primary">
+                  Delete
+                </button>
+
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
         <PaginationControl
-          page={page}
-          between={4}
-          total={250}
+          page={pageNumber}
+          total={100}
           limit={20}
-          changePage={(page) => {
-            setPage(page); 
-            console.log(page)
-          }}
-          ellipsis={1}
-          />
+          changePage={(page) => handleClickPagnation(page)}
+        />
       </div>
     </div>
   )

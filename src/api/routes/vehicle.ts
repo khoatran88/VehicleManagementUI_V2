@@ -30,7 +30,7 @@ export const fetchVehicles = async (PageNumber: number, PageSize: number): Promi
 
 export const fetchDetail = async (id: string): Promise<VehicleVM> => {
   let data: VehicleVM = {}
-  await api.get(`${apiUrl.vehicle.getVehicleDetail}?${id}`)
+  await api.get(`${apiUrl.vehicle.getVehicleDetail}?vehicleId=${id}`)
     .then((response) => {
       if (response) {
         data = response.data;
