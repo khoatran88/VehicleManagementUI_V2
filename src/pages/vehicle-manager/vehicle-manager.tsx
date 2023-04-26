@@ -1,5 +1,4 @@
 import { Component } from 'react'
-import GetVehicle from 'src/api/routes/vehicle';
 import { VehicleVM } from 'src/types';
 import { VechicleTable } from './vehicle-table';
 import * as VehicleActions from 'src/api/routes'
@@ -15,7 +14,7 @@ type VehicleManagerState = {
 };
 
 export default class VehicleManager extends Component<VehicleManagerProps, VehicleManagerState> {
-  dataVH: VehicleVM = {}
+  vehicle: VehicleVM = {}
 
   vehicles: VehicleVM[] = []
 
@@ -26,7 +25,6 @@ export default class VehicleManager extends Component<VehicleManagerProps, Vehic
       pageNumber: 1,
       pageSize: 20
     };
-    this.dataVH = GetVehicle()
   }
 
   async componentDidMount() {
@@ -38,9 +36,20 @@ export default class VehicleManager extends Component<VehicleManagerProps, Vehic
     return rs
   }
 
+  async fetchVehicleDetail(id: string) {
+    var rs = await VehicleActions.fetchDetail(id);
+    this.vehicle = rs.data as VehicleVM;
+  }
+
   setModalShow = (data: boolean) => {
     this.setState({ modalShow: data });
+    if (!this.state.modalShow) this.vehicle = {}
   };
+
+  editVehicle = async (vehicleId: string) => {
+    await this.fetchVehicleDetail(vehicleId!);
+    this.setModalShow(!this.state.modalShow)
+  }
 
   render() {
     const { modalShow } = this.state;
@@ -51,10 +60,10 @@ export default class VehicleManager extends Component<VehicleManagerProps, Vehic
             <button className="btn btn-primary" type="button" onClick={() => this.setModalShow(true)}>Add New</button>
           </div>
           <div className="col-12">
-            <VechicleTable vehicles={this.vehicles} />
+            <VechicleTable vehicles={this.vehicles} handleEditVehicle={this.editVehicle} />
           </div>
         </div>
-        <VehicleCreateEdit show={modalShow} onHide={() => this.setModalShow(false)} data={this.dataVH} />
+        <VehicleCreateEdit show={modalShow} onHide={() => this.setModalShow(false)} data={this.vehicle} />
       </div >
     )
   }

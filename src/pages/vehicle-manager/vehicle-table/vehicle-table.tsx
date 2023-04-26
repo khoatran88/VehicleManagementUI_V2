@@ -2,8 +2,13 @@ import { useState } from 'react';
 import { PaginationControl } from 'react-bootstrap-pagination-control';
 import { VehicleVM } from 'src/types'
 
-export default function VechicleTable({ vehicles }: { vehicles: VehicleVM[] }) {
+export default function VechicleTable({ handleEditVehicle, vehicles }: { handleEditVehicle: any, vehicles: VehicleVM[] }) {
   const [page, setPage] = useState(1)
+
+  const editVehicle = (vehicleId: string) => {
+    handleEditVehicle(vehicleId)
+  }
+
   return (
     <div className="row">
       <div className="col-12">
@@ -35,10 +40,8 @@ export default function VechicleTable({ vehicles }: { vehicles: VehicleVM[] }) {
                 <td>{data.productionYear}</td>
                 <td>{data.lifetimeLimitTo}</td>
                 <td>
-                  <button
-                    type="button"
-                    className="btn btn-primary pl-5"
-                  >
+                  <button type="button" className="btn btn-primary pl-5"
+                    onClick={() => editVehicle(data.id!)}>
                     Edit Vehicle
                   </button>
                   <button type="button" className="btn btn-primary">
@@ -55,11 +58,11 @@ export default function VechicleTable({ vehicles }: { vehicles: VehicleVM[] }) {
           total={250}
           limit={20}
           changePage={(page) => {
-            setPage(page); 
+            setPage(page);
             console.log(page)
           }}
           ellipsis={1}
-          />
+        />
       </div>
     </div>
   )
