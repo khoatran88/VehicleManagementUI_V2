@@ -12,3 +12,11 @@ export interface PagedResponse extends Response {
     hasPrevious?: boolean
     hasNext?: boolean
 }
+
+export interface Pagnation{
+    pageNumber: number
+    totalCount?: number
+    pageSize: number
+    hasPrevious?: boolean
+    hasNext?: boolean
+}

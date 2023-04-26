@@ -1,13 +1,14 @@
 import { useState } from 'react';
 import { PaginationControl } from 'react-bootstrap-pagination-control';
 import { VehicleVM } from 'src/types'
+import { PagedResponse, Pagnation } from 'src/types/response';
 
-export default function VechicleTable({ handleEditVehicle, vehicles, handleGetData, pageNumber, totalCount, pageSize }: { handleEditVehicle: any, vehicles: VehicleVM[]; handleGetData:any; pageNumber:number; totalCount?: number, pageSize: number }) {
+export default function VechicleTable({ handleEditVehicle, vehicles, handleGetData, pagnation }: 
+  { handleEditVehicle: any, vehicles: VehicleVM[]; handleGetData:any; pagnation: Pagnation }) {
 
   const editVehicle = (vehicleId: string) => {
     handleEditVehicle(vehicleId)
   }
-  const [page, setPage] = useState(1)
 
   const handleClickPagnation = handleGetData
 
@@ -57,12 +58,12 @@ export default function VechicleTable({ handleEditVehicle, vehicles, handleGetDa
           </tbody>
         </table>
         <PaginationControl
-          page={pageNumber}
-          total={totalCount || 0}
-          limit={pageSize}
+          page={pagnation.pageNumber}
+          total={pagnation.totalCount || 0}
+          limit={pagnation.pageSize}
           changePage={(page) => handleClickPagnation(page)}
-          next={true}
-          last={true}
+          next={pagnation.hasNext}
+          last={pagnation.hasPrevious}
         />
       </div>
     </div>
