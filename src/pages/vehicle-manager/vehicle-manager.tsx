@@ -5,7 +5,8 @@ import * as VehicleActions from 'src/api/routes'
 import VehicleCreateEdit from './vehicle-create-edit/vehicle-create-edit'
 import { Pagnation, DefaultPagnation } from 'src/types/response'
 
-interface VehicleManagerProps { }
+interface VehicleManagerProps {
+}
 
 type VehicleManagerState = {
   modalShow: boolean
@@ -18,7 +19,6 @@ export default class VehicleManager extends Component<
 > {
   vehicle: VehicleVM = {}
   vehicles: VehicleVM[] = []
-
   constructor(props: VehicleManagerProps) {
     super(props)
     this.state = {

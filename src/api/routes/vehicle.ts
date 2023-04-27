@@ -29,9 +29,3 @@ export const fetchDetail = async (id: string): Promise<Response> => {
     })
   return data
 }
-
-export const getVehicleById = async () => {
-  const { data } = await api.get(apiUrl.vehicle.getVehicleDetail)
-
-  return data.data
-}
