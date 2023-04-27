@@ -67,6 +67,10 @@ module.exports = {
         unnamedComponents: ['function-expression', 'arrow-function'],
       },
     ],
+    'react/destructuring-assignment': [{
+      "ignoreClassFields": true,
+      "destructureInSignature": "always"
+    }],
     'jsx-a11y/label-has-associated-control': [2, {
       'labelComponents': ['CustomInputLabel'],
       'labelAttributes': ['label'],

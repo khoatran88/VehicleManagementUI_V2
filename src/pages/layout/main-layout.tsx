@@ -1,13 +1,16 @@
 import { Suspense } from 'react'
 import { Outlet } from 'react-router-dom'
-import { SmallSpinner } from 'src/components'
+import { SmallSpinner, SidebarMenu } from 'src/components'
 
-export default function DashboardLayout() {
+export default function MainLayout() {
   return (
-    <div className="flex h-screen min-w-full flex-col justify-between">
-      <main className="flex grow flex-col">
+    <div>
+      <main className="row align-items-start">
         {/* <Header /> */}
-        <div className="grow px-8 py-5 sm:px-20">
+        <div className="col-md-2">
+          <SidebarMenu />
+        </div>
+        <div className="col-md-10">
           <Suspense fallback={<SmallSpinner />}>
             <Outlet />
           </Suspense>
