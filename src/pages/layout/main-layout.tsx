@@ -10,7 +10,7 @@ export default function MainLayout() {
         <div className="col-md-2">
           <SidebarMenu />
         </div>
-        <div className="col-md-10">
+        <div className="col-md-10 pt-5">
           <Suspense fallback={<SmallSpinner />}>
             <Outlet />
           </Suspense>

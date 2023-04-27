@@ -69,31 +69,33 @@ export default class VehicleManager extends Component<
     const { modalShow } = this.state
     const { pagnation } = this.state
     return (
-      <div className="container-fluid">
-        <div className="row px-5">
-          <div className="col-12">
-            <button
-              className="btn btn-primary"
-              type="button"
-              onClick={() => this.setShowCreateEdit(true)}
-            >
-              Add New
-            </button>
+      <div className="row">
+        <div className="col-12">
+          <div className="row">
+            <div className="col-12">
+              <button
+                className="btn btn-primary"
+                type="button"
+                onClick={() => this.setShowCreateEdit(true)}
+              >
+                Add New
+              </button>
+            </div>
+            <div className="col-12">
+              <VechicleTable
+                vehicles={this.vehicles}
+                handleEditVehicle={this.editVehicle}
+                handleGetData={this.handleClickPagnation}
+                pagnation={pagnation}
+              />
+            </div>
           </div>
-          <div className="col-12">
-            <VechicleTable
-              vehicles={this.vehicles}
-              handleEditVehicle={this.editVehicle}
-              handleGetData={this.handleClickPagnation}
-              pagnation={pagnation}
-            />
-          </div>
+          <VehicleCreateEdit
+            show={modalShow}
+            onHide={() => this.setShowCreateEdit(false)}
+            data={this.vehicle}
+          />
         </div>
-        <VehicleCreateEdit
-          show={modalShow}
-          onHide={() => this.setShowCreateEdit(false)}
-          data={this.vehicle}
-        />
       </div>
     )
   }

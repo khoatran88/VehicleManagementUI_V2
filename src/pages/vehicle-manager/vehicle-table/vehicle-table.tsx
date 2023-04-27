@@ -26,7 +26,6 @@ export default function VechicleTable({
         <table className="table">
           <thead>
             <tr>
-              <th scope="col">Id</th>
               <th scope="col">Plate Number</th>
               <th scope="col">Brand</th>
               <th scope="col">Model</th>
@@ -42,7 +41,6 @@ export default function VechicleTable({
           <tbody>
             {vehicles.map((data) => (
               <tr key={data.id}>
-                <td>{data.id}</td>
                 <td>{data.plateNumber}</td>
                 <td>{data.brand}</td>
                 <td>{data.model}</td>
@@ -59,9 +57,6 @@ export default function VechicleTable({
                     onClick={() => editVehicle(data.id!)}
                   >
                     Edit Vehicle
-                  </button>
-                  <button type="button" className="btn btn-primary">
-                    Delete
                   </button>
                 </td>
               </tr>
