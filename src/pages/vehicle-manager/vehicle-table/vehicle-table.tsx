@@ -1,13 +1,24 @@
-import { useState } from 'react';
-import { PaginationControl } from 'react-bootstrap-pagination-control';
+import { useState } from 'react'
+import { PaginationControl } from 'react-bootstrap-pagination-control'
 import { VehicleVM } from 'src/types'
+import { PagedResponse, Pagnation } from 'src/types/response'
 
-export default function VechicleTable({ handleEditVehicle, vehicles }: { handleEditVehicle: any, vehicles: VehicleVM[] }) {
-  const [page, setPage] = useState(1)
-
+export default function VechicleTable({
+  handleEditVehicle,
+  vehicles,
+  handleGetData,
+  pagnation,
+}: {
+  handleEditVehicle: any
+  vehicles: VehicleVM[]
+  handleGetData: any
+  pagnation: Pagnation
+}) {
   const editVehicle = (vehicleId: string) => {
     handleEditVehicle(vehicleId)
   }
+
+  const handleClickPagnation = handleGetData
 
   return (
     <div className="row">
@@ -15,6 +26,7 @@ export default function VechicleTable({ handleEditVehicle, vehicles }: { handleE
         <table className="table">
           <thead>
             <tr>
+              <th scope="col">Id</th>
               <th scope="col">Plate Number</th>
               <th scope="col">Brand</th>
               <th scope="col">Model</th>
@@ -28,8 +40,9 @@ export default function VechicleTable({ handleEditVehicle, vehicles }: { handleE
             </tr>
           </thead>
           <tbody>
-            {vehicles.map((data =>
+            {vehicles.map((data) => (
               <tr key={data.id}>
+                <td>{data.id}</td>
                 <td>{data.plateNumber}</td>
                 <td>{data.brand}</td>
                 <td>{data.model}</td>
@@ -40,8 +53,11 @@ export default function VechicleTable({ handleEditVehicle, vehicles }: { handleE
                 <td>{data.productionYear}</td>
                 <td>{data.lifetimeLimitTo}</td>
                 <td>
-                  <button type="button" className="btn btn-primary pl-5"
-                    onClick={() => editVehicle(data.id!)}>
+                  <button
+                    type="button"
+                    className="btn btn-primary pl-5"
+                    onClick={() => editVehicle(data.id!)}
+                  >
                     Edit Vehicle
                   </button>
                   <button type="button" className="btn btn-primary">
@@ -53,15 +69,12 @@ export default function VechicleTable({ handleEditVehicle, vehicles }: { handleE
           </tbody>
         </table>
         <PaginationControl
-          page={page}
-          between={4}
-          total={250}
-          limit={20}
-          changePage={(page) => {
-            setPage(page);
-            console.log(page)
-          }}
-          ellipsis={1}
+          page={pagnation.pageNumber}
+          total={pagnation.totalCount || 0}
+          limit={pagnation.pageSize}
+          changePage={(page) => handleClickPagnation(page)}
+          next={pagnation.hasNext}
+          last={pagnation.hasPrevious}
         />
       </div>
     </div>
