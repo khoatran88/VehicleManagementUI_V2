@@ -21,6 +21,7 @@ export default function VehicleCreateEdit({
       <Modal.Header>
         <Modal.Title id="contained-modal-title-vcenter">
           Edit Vehicle
+          {data.id}
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
@@ -51,7 +52,7 @@ export default function VehicleCreateEdit({
                           className="form-control"
                           type="text"
                           placeholder="Id"
-                          defaultValue={data?.id}
+                          defaultValue={data.id}
                         />
                       </div>
                     </div>
@@ -64,7 +65,7 @@ export default function VehicleCreateEdit({
                           className="form-control"
                           type="text"
                           placeholder="Plate Number"
-                          defaultValue={data?.plateNumber}
+                          defaultValue={data.plateNumber}
                         />
                       </div>
                     </div>
@@ -77,7 +78,7 @@ export default function VehicleCreateEdit({
                           className="form-control"
                           type="text"
                           placeholder="Password"
-                          defaultValue={data?.brand}
+                          defaultValue={data.brand}
                         />
                       </div>
                     </div>
@@ -90,7 +91,7 @@ export default function VehicleCreateEdit({
                           className="form-control"
                           type="text"
                           placeholder="Model"
-                          defaultValue={data?.model}
+                          defaultValue={data.model}
                         />
                       </div>
                     </div>
@@ -103,7 +104,7 @@ export default function VehicleCreateEdit({
                           className="form-control"
                           type="text"
                           placeholder="Engine Number"
-                          defaultValue={data?.engineNumber}
+                          defaultValue={data.engineNumber}
                         />
                       </div>
                     </div>
@@ -116,7 +117,7 @@ export default function VehicleCreateEdit({
                           className="form-control"
                           type="text"
                           placeholder="Chassis Number"
-                          defaultValue={data?.chassisNumber}
+                          defaultValue={data.chassisNumber}
                         />
                       </div>
                     </div>
@@ -129,7 +130,7 @@ export default function VehicleCreateEdit({
                           className="form-control"
                           type="text"
                           placeholder="Model"
-                          defaultValue={data?.color}
+                          defaultValue={data.color}
                         />
                       </div>
                     </div>
@@ -142,7 +143,7 @@ export default function VehicleCreateEdit({
                           className="form-control"
                           type="text"
                           placeholder="Model"
-                          defaultValue={data?.type}
+                          defaultValue={data.type}
                         />
                       </div>
                     </div>
@@ -155,7 +156,7 @@ export default function VehicleCreateEdit({
                           className="form-control"
                           type="text"
                           placeholder="Production Year"
-                          defaultValue={data?.productionYear}
+                          defaultValue={data.productionYear}
                         />
                       </div>
                     </div>
@@ -168,7 +169,7 @@ export default function VehicleCreateEdit({
                           className="form-control"
                           type="text"
                           placeholder="Production Country"
-                          defaultValue={data?.productionCountry}
+                          defaultValue={data.productionCountry}
                         />
                       </div>
                     </div>
@@ -181,7 +182,7 @@ export default function VehicleCreateEdit({
                           className="form-control"
                           type="text"
                           placeholder="Life Time Limit To"
-                          defaultValue={data?.lifetimeLimitTo}
+                          defaultValue={data.lifetimeLimitTo}
                         />
                       </div>
                     </div>

@@ -3,9 +3,9 @@ import { VehicleVM } from 'src/types'
 import { VechicleTable } from './vehicle-table'
 import * as VehicleActions from 'src/api/routes'
 import VehicleCreateEdit from './vehicle-create-edit/vehicle-create-edit'
-import { Pagnation } from 'src/types/response'
+import { Pagnation, DefaultPagnation } from 'src/types/response'
 
-interface VehicleManagerProps {}
+interface VehicleManagerProps { }
 
 type VehicleManagerState = {
   modalShow: boolean
@@ -17,39 +17,29 @@ export default class VehicleManager extends Component<
   VehicleManagerState
 > {
   vehicle: VehicleVM = {}
-
   vehicles: VehicleVM[] = []
-
-  pg: Pagnation = {
-    pageNumber: 1,
-    totalCount: 1000,
-    pageSize: 5,
-    hasPrevious: true,
-    hasNext: false,
-  }
 
   constructor(props: VehicleManagerProps) {
     super(props)
     this.state = {
       modalShow: false,
-      pagnation: this.pg,
+      pagnation: DefaultPagnation()
     }
   }
 
   async componentDidMount() {
-    await this.fetchData()
+    await this.fetchData(this.state.pagnation.pageNumber, this.state.pagnation.pageSize)
   }
 
-  async fetchData() {
-    var rs = await this.fetchVehicles(
-      this.state.pagnation.pageNumber,
-      this.state.pagnation.pageSize
-    )
-    this.vehicles = rs.data as VehicleVM[]
-    this.pg.totalCount = rs.totalCount
-    this.pg.hasNext = rs.hasNext
-    this.pg.hasPrevious = true
-    this.setState({ pagnation: this.pg })
+  fetchDataPagnation(pageNumber: number, totalCount: number, pageSize: number, hasPrevious: boolean, hasNext: boolean) {
+    let pg = DefaultPagnation(pageNumber, totalCount, pageSize, hasPrevious, hasNext)
+    this.setState({ pagnation: pg })
+  }
+
+  async fetchData(pageNumber: number, pageSize: number) {
+    var response = await this.fetchVehicles(pageNumber, pageSize)
+    this.vehicles = response.data as VehicleVM[]
+    this.fetchDataPagnation(pageNumber, response.totalCount!, pageSize, response.hasPrevious!, response.hasNext!)
   }
 
   async fetchVehicles(PageNumber: number, PageSize: number) {
@@ -57,24 +47,22 @@ export default class VehicleManager extends Component<
   }
 
   async fetchVehicleDetail(id: string) {
+    this.vehicle = {}
     var rs = await VehicleActions.fetchDetail(id)
     this.vehicle = rs.data as VehicleVM
   }
 
-  setModalShow = (data: boolean) => {
+  setShowCreateEdit = (data: boolean) => {
     this.setState({ modalShow: data })
-    if (!this.state.modalShow) this.vehicle = {}
   }
 
   editVehicle = async (vehicleId: string) => {
     await this.fetchVehicleDetail(vehicleId!)
-    this.setModalShow(!this.state.modalShow)
+    this.setShowCreateEdit(true)
   }
 
   handleClickPagnation = async (data: number) => {
-    this.pg.pageNumber = data
-    this.setState({ pagnation: this.pg })
-    await this.fetchData()
+    await this.fetchData(data, this.state.pagnation.pageSize)
   }
 
   render() {
@@ -87,7 +75,7 @@ export default class VehicleManager extends Component<
             <button
               className="btn btn-primary"
               type="button"
-              onClick={() => this.setModalShow(true)}
+              onClick={() => this.setShowCreateEdit(true)}
             >
               Add New
             </button>
@@ -103,7 +91,7 @@ export default class VehicleManager extends Component<
         </div>
         <VehicleCreateEdit
           show={modalShow}
-          onHide={() => this.setModalShow(false)}
+          onHide={() => this.setShowCreateEdit(false)}
           data={this.vehicle}
         />
       </div>
