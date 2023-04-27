@@ -1,9 +1,9 @@
 import { useQuery } from 'react-query'
-import { queryKeys } from 'src/api/query-keys'
-import { getVehicleById } from 'src/api/routes'
+import { queryKeys, queryKeysVehicle } from 'src/api/query-keys'
+import * as VehicleActions from 'src/api/routes'
 
-export default function useVehicle() {
+export function useVehicle() {
   return {
-    ...useQuery([queryKeys.getVehicle], () => getVehicleById(), {}),
+    ...useQuery([queryKeys.getVehicle], () => VehicleActions.getVehicleById(), {}),
   }
 }

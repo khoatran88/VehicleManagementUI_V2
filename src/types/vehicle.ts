@@ -1,4 +1,5 @@
-export type Vehicle = {
+export interface VehicleVM {
+  id?: string
   plateNumber?: string
   brand?: string
   model?: string
@@ -9,15 +10,6 @@ export type Vehicle = {
   productionYear?: number
   productionCountry?: string
   lifetimeLimitTo?: number
-  purchasedDate?: string
-  lastInspectionDate?: string
-  lastUpdatedDate?: string
-  grossMass?: string
-  dimension?: string
+  purchasedDate?: Date
+  lastInspectionDate?: Date
 }
-
-export type VehicleId = {
-  vehicleId: string
-}
-
-export type VehicleList = [vehicles: Vehicle]
