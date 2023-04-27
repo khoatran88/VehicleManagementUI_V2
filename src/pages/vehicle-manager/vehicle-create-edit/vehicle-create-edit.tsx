@@ -42,7 +42,7 @@ export default function VehicleCreateEdit({
               <div className="col-6">
                 <div className="row">
                   <div className="col-12">
-                  <div className="row pb-2">
+                    <div className="row pb-2">
                       <div className="col-6">
                         <h6>Id:</h6>
                       </div>
