@@ -21,13 +21,8 @@ export type Pagnation = {
   hasNext: boolean
 }
 
-export function DefaultPagnation(
-  pageNumber: number = 1,
-  totalCount: number = 0,
-  pageSize: number = 20,
-  hasPrevious: boolean = false,
-  hasNext: boolean = false
-): Pagnation {
+export function DefaultPagnation(pageNumber: number = 1, totalCount: number = 0, pageSize: number = 20
+  , hasPrevious: boolean = false, hasNext: boolean = false): Pagnation {
   return {
     pageNumber: pageNumber,
     totalCount: totalCount,

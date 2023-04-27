@@ -1,20 +1,26 @@
 import { Navigate, RouteObject } from 'react-router-dom'
-import { DashboardLayout, RequireAuth, VehicleManager } from 'src/pages'
+import { Dashboard, MainLayout, RequireAuth, VehicleManager } from 'src/pages'
 
 export function privateRoutes(): RouteObject[] {
   const privateRoutes: RouteObject[] = [
     {
       path: '/',
-      element: <RequireAuth />,
+      element: <MainLayout />,
       children: [
-        { path: '', element: <Navigate to="dashboard" replace /> },
         {
-          path: 'dashboard',
-          element: <DashboardLayout />,
-        },
-        {
-          path: 'vehicle-mannager',
-          element: <VehicleManager />,
+          path: '/',
+          element: <RequireAuth />,
+          children: [
+            { path: '', element: <Navigate to="dashboard" replace /> },
+            {
+              path: 'dashboard',
+              element: <Dashboard />,
+            },
+            {
+              path: 'vehicle-mannager',
+              element: <VehicleManager />,
+            },
+          ],
         },
       ],
     },
