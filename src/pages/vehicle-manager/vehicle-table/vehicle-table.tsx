@@ -65,7 +65,7 @@ export default function VechicleTable({
         </table>
         <PaginationControl
           page={pagnation.pageNumber}
-          total={pagnation.totalCount || 0}
+          total={pagnation.totalCount!}
           limit={pagnation.pageSize}
           changePage={(page) => handleClickPagnation(page)}
           next={pagnation.hasNext}

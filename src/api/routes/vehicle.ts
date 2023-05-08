@@ -29,3 +29,15 @@ export const fetchDetail = async (id: string): Promise<Response> => {
     })
   return data
 }
+
+export const fetchCreateVehicle = async (vehicle: VehicleVM): Promise<Response> => {
+  let data: Response = {}
+  await api
+    .post(apiUrl.vehicle.createVehicle, {vehicle})
+    .then((response) => {
+      if (response) {
+        data = response.data
+      }
+    })
+  return data
+}

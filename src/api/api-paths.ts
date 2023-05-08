@@ -9,5 +9,6 @@ export const apiUrl = {
   vehicle: {
     getVehicleDetail: path(BASE_URL, '/Vehicle/GetVehicleById'),
     getVehicles: path(BASE_URL, '/Vehicle/GetAllVehicles'),
+    createVehicle: path(BASE_URL, '/Vehicle/CreateVehicle'),
   },
 }
