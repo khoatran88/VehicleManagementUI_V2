@@ -22,7 +22,9 @@ instance.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error) {
-      window.localStorage.removeItem('authToken')
+      console.log('error', error);
+      
+      // window.localStorage.removeItem('authToken')
       // window.location.reload()
     }
     return Promise.reject(error)

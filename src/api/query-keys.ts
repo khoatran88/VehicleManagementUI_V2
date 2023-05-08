@@ -5,4 +5,5 @@ export const queryKeys = {
 
 export const queryKeysVehicle = {
   getVehicles: 'get-all-vehicles',
+  addVehicles: 'add-vehicles',
 }

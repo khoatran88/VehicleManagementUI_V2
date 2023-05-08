@@ -1,10 +1,8 @@
-import { setPriority } from 'os'
-import { useState } from 'react'
-import { Button, Modal } from 'react-bootstrap'
+import { Modal } from 'react-bootstrap'
 import anh1 from 'src/asset/images/logo-merc.jpg'
 import { VehicleVM } from 'src/types'
-import * as VehicleActions from 'src/api/routes'
-import { SubmitHandler, useForm } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
+import { useVehicle } from 'src/hooks/vehicle'
 
 export default function VehicleCreateEdit({
   show,
@@ -15,11 +13,13 @@ export default function VehicleCreateEdit({
   onHide: any
   data: VehicleVM
 }) {
+  const { mutate: handleAddVehicle } = useVehicle()
+
   const { register, handleSubmit } = useForm();
   const onSubmit = (data: any) => {
-    console.log(data)
-
-  };
+    console.log(data);
+    handleAddVehicle(data)
+  }
 
   return (
     <Modal
