@@ -1,7 +1,35 @@
 @import "~bootstrap/scss/bootstrap";
 @import "bootstrap-icons/font/bootstrap-icons";
+@import "_variables.scss";
 
 * {
   font-family: 'Poppins', sans-serif;
 }
 
+button {
+  &:hover {
+    background-color: $lightDark100 !important;
+  }
+  &:active {
+    border: 1px solid $primary300 !important;
+  }
+  &.show {
+    border-color: $primary300 !important;
+  }
+  .button-content {
+    display: flex;
+    align-items: center;
+    .button-text {
+      display: flex;
+      flex-direction: column;
+      align-items: self-start;
+      .text {
+        font-size: 12px;
+        color: $lightDark500;
+      }
+      .selected-lang {
+        font-size: 14px;
+      }
+    }
+  }
+}

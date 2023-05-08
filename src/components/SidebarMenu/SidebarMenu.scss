@@ -4,6 +4,7 @@
   color: $lightDark800;
   border-right: $primary50 1px solid;
   &-content {
+    flex: 1 1 0%;
     .navbar {
       padding: 0;
       margin: 0;
@@ -23,6 +24,14 @@
           }
         }
       }
+    }
+  }
+  &-footer {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 5rem;
+    .dropdown {
+      width: 250px;
     }
   }
 }

@@ -5,12 +5,12 @@ import { SmallSpinner, SidebarMenu } from 'src/components'
 export default function MainLayout() {
   return (
     <div>
-      <main className="row align-items-start">
+      <main className="row m-auto">
         {/* <Header /> */}
-        <div className="col-md-2">
+        <aside className="col-md-2 ps-0">
           <SidebarMenu />
-        </div>
-        <div className="col-md-10">
+        </aside>
+        <div className="col-md-9">
           <Suspense fallback={<SmallSpinner />}>
             <Outlet />
           </Suspense>

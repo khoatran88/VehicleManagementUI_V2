@@ -51,19 +51,6 @@ const SidebarMenuItemsCollapse = ({
             />
           )
         )}
-        {/* <ul className="navbar d-flex flex-column">
-          <li className="nav-item w-100 list-unstyled child">
-            <a
-              href="/dashboard"
-              className="nav-link d-flex justify-content-between"
-            >
-              <div className="nav-item-content">
-                <i className="bi bi-clipboard-data" />
-                <span className="ms-2">Vehicle Mannager</span>
-              </div>
-            </a>
-          </li>
-        </ul> */}
       </div>
     </ul>
   )
