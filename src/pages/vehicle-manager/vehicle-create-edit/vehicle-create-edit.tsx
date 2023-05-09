@@ -16,9 +16,10 @@ export default function VehicleCreateEdit({
   const { mutate: handleAddVehicle } = useVehicle()
 
   const { register, handleSubmit } = useForm();
-  const onSubmit = (data: any) => {
-    console.log(data);
-    handleAddVehicle(data)
+
+  const onSubmit = (value: VehicleVM) => {
+    console.log(value);
+    handleAddVehicle(value)
   }
 
   return (
@@ -54,12 +55,6 @@ export default function VehicleCreateEdit({
                 <form onSubmit={handleSubmit(onSubmit)}>
                   <div className="row">
                     <div className="col-6">
-                      <div className="row pb-2">
-                        <div className="col-6"><h6>Id:</h6></div>
-                        <div className="col-6">
-                          <input className="form-control" type="text" placeholder="Id" defaultValue={data.id} {...register("id")} />
-                        </div>
-                      </div>
                       <div className="row pb-2">
                         <div className="col-6">
                           <h6>Plate Number:</h6>
@@ -145,7 +140,7 @@ export default function VehicleCreateEdit({
                           <h6>Purchased Date:</h6>
                         </div>
                         <div className="col-6">
-                          <input className="form-control" type="text" placeholder="Purchased Date" {...register("purchasedDate")} />
+                          <input className="form-control" type="datetime-local" placeholder="Purchased Date" {...register("purchasedDate")} />
                         </div>
                       </div>
                       <div className="row pb-2">
@@ -153,7 +148,7 @@ export default function VehicleCreateEdit({
                           <h6>Last Updated Date:</h6>
                         </div>
                         <div className="col-6">
-                          <input className="form-control" type="text" placeholder="Last Updated Date" {...register("lastUpdatedDate")} />
+                          <input className="form-control" type="datetime-local" placeholder="Last Updated Date" {...register("lastUpdatedDate")} />
                         </div>
                       </div>
                       <div className="row pb-2">
@@ -161,7 +156,7 @@ export default function VehicleCreateEdit({
                           <h6>Last Inspection Date:</h6>
                         </div>
                         <div className="col-6">
-                          <input className="form-control" type="text" placeholder="Last Inspection Date" {...register("lastInspectionDate")} />
+                          <input className="form-control" type="datetime-local" placeholder="Last Inspection Date" {...register("lastInspectionDate")} />
                         </div>
                       </div>
                       <div className="row pb-2">
@@ -174,29 +169,15 @@ export default function VehicleCreateEdit({
                       </div>
                     </div>
 
-                    {/* VehicleSpecs */}
+                    {/* vehicleSpec */}
 
                     <div className="col-6">
-                      <div className="row pb-2">
-                        <div className="col-6"><h6>VehicleSpec Id:</h6></div>
-                        <div className="col-6">
-                          <input className="form-control" type="text" placeholder="Id" {...register("vehicleSpecs.id")} />
-                        </div>
-                      </div>
                       <div className="row pb-2">
                         <div className="col-6">
                           <h6>Last Updated Date:</h6>
                         </div>
                         <div className="col-6">
-                          <input className="form-control" type="text" placeholder="Last Updated Date" {...register("vehicleSpecs.lastUpdatedDate")} />
-                        </div>
-                      </div>
-                      <div className="row pb-2">
-                        <div className="col-6">
-                          <h6>VehicleId:</h6>
-                        </div>
-                        <div className="col-6">
-                          <input className="form-control" type="text" placeholder="vehicleId" {...register("vehicleSpecs.vehicleId")} />
+                          <input className="form-control" type="datetime-local" placeholder="Last Updated Date" {...register("vehicleSpec.lastUpdatedDate")} />
                         </div>
                       </div>
                       <div className="row pb-2">
@@ -204,7 +185,7 @@ export default function VehicleCreateEdit({
                           <h6>Engine Type:</h6>
                         </div>
                         <div className="col-6">
-                          <input className="form-control" type="text" placeholder="Engine Type" {...register("vehicleSpecs.engineType")} />
+                          <input className="form-control" type="text" placeholder="Engine Type" {...register("vehicleSpec.engineType")} />
                         </div>
                       </div>
                       <div className="row pb-2">
@@ -212,7 +193,7 @@ export default function VehicleCreateEdit({
                           <h6>Number Of Cylinders:</h6>
                         </div>
                         <div className="col-6">
-                          <input className="form-control" type="text" placeholder="Number Of Cylinders" {...register("vehicleSpecs.numberofCylinders", { valueAsNumber: true })} />
+                          <input className="form-control" type="text" placeholder="Number Of Cylinders" {...register("vehicleSpec.numberofCylinders", { valueAsNumber: true })} />
                         </div>
                       </div>
                       <div className="row pb-2">
@@ -220,7 +201,7 @@ export default function VehicleCreateEdit({
                           <h6>Output:</h6>
                         </div>
                         <div className="col-6">
-                          <input className="form-control" type="text" placeholder="Output" {...register("vehicleSpecs.output", { valueAsNumber: true })} />
+                          <input className="form-control" type="text" placeholder="Output" {...register("vehicleSpec.output", { valueAsNumber: true })} />
                         </div>
                       </div>
                       <div className="row pb-2">
@@ -228,7 +209,7 @@ export default function VehicleCreateEdit({
                           <h6>Tranmission Type:</h6>
                         </div>
                         <div className="col-6">
-                          <input className="form-control" type="text" placeholder="Tranmission Type" {...register("vehicleSpecs.tranmissionType")} />
+                          <input className="form-control" type="text" placeholder="Tranmission Type" {...register("vehicleSpec.tranmissionType")} />
                         </div>
                       </div>
                       <div className="row pb-2">
@@ -236,7 +217,7 @@ export default function VehicleCreateEdit({
                           <h6>Brake Type:</h6>
                         </div>
                         <div className="col-6">
-                          <input className="form-control" type="text" placeholder="Brake Type" {...register("vehicleSpecs.brakeType")} />
+                          <input className="form-control" type="text" placeholder="Brake Type" {...register("vehicleSpec.brakeType")} />
                         </div>
                       </div>
                       <div className="row pb-2">
@@ -244,7 +225,7 @@ export default function VehicleCreateEdit({
                           <h6>Drive Train Type:</h6>
                         </div>
                         <div className="col-6">
-                          <input className="form-control" type="text" placeholder="Drive Train Type" {...register("vehicleSpecs.drivetrainType")} />
+                          <input className="form-control" type="text" placeholder="Drive Train Type" {...register("vehicleSpec.drivetrainType")} />
                         </div>
                       </div>
                       <div className="row pb-2">
@@ -252,7 +233,7 @@ export default function VehicleCreateEdit({
                           <h6>Wheel Formula:</h6>
                         </div>
                         <div className="col-6">
-                          <input className="form-control" type="text" placeholder="Wheel Formula" {...register("vehicleSpecs.wheelFormula")} />
+                          <input className="form-control" type="text" placeholder="Wheel Formula" {...register("vehicleSpec.wheelFormula")} />
                         </div>
                       </div>
                       <div className="row pb-2">
@@ -260,7 +241,7 @@ export default function VehicleCreateEdit({
                           <h6>Wheel Tread:</h6>
                         </div>
                         <div className="col-6">
-                          <input className="form-control" type="text" placeholder="Wheel Tread" {...register("vehicleSpecs.wheelTread")} />
+                          <input className="form-control" type="text" placeholder="Wheel Tread" {...register("vehicleSpec.wheelTread")} />
                         </div>
                       </div>
                       <div className="row pb-2">
@@ -268,7 +249,7 @@ export default function VehicleCreateEdit({
                           <h6>Dimension:</h6>
                         </div>
                         <div className="col-6">
-                          <input className="form-control" type="text" placeholder="Dimension" {...register("vehicleSpecs.dimension")} />
+                          <input className="form-control" type="text" placeholder="Dimension" {...register("vehicleSpec.dimension")} />
                         </div>
                       </div>
                       <div className="row pb-2">
@@ -276,7 +257,7 @@ export default function VehicleCreateEdit({
                           <h6>Wheel Base:</h6>
                         </div>
                         <div className="col-6">
-                          <input className="form-control" type="text" placeholder="Wheel Base" {...register("vehicleSpecs.wheelbase")} />
+                          <input className="form-control" type="text" placeholder="Wheel Base" {...register("vehicleSpec.wheelbase")} />
                         </div>
                       </div>
                       <div className="row pb-2">
@@ -284,7 +265,7 @@ export default function VehicleCreateEdit({
                           <h6>Kerb Mass:</h6>
                         </div>
                         <div className="col-6">
-                          <input className="form-control" type="text" placeholder="Kerb Mass" {...register("vehicleSpecs.kerbMass", { valueAsNumber: true })} />
+                          <input className="form-control" type="text" placeholder="Kerb Mass" {...register("vehicleSpec.kerbMass", { valueAsNumber: true })} />
                         </div>
                       </div>
                       <div className="row pb-2">
@@ -292,7 +273,7 @@ export default function VehicleCreateEdit({
                           <h6>Gross Mass:</h6>
                         </div>
                         <div className="col-6">
-                          <input className="form-control" type="text" placeholder="Gross Mass" {...register("vehicleSpecs.grossMass", { valueAsNumber: true })} />
+                          <input className="form-control" type="text" placeholder="Gross Mass" {...register("vehicleSpec.grossMass", { valueAsNumber: true })} />
                         </div>
                       </div>
                       <div className="row pb-2">
@@ -300,7 +281,7 @@ export default function VehicleCreateEdit({
                           <h6>Seats:</h6>
                         </div>
                         <div className="col-6">
-                          <input className="form-control" type="text" placeholder="Seats" {...register("vehicleSpecs.seats", { valueAsNumber: true })} />
+                          <input className="form-control" type="text" placeholder="Seats" {...register("vehicleSpec.seats", { valueAsNumber: true })} />
                         </div>
                       </div>
                       <div className="row pb-2">
@@ -308,7 +289,7 @@ export default function VehicleCreateEdit({
                           <h6>Number Of Tires:</h6>
                         </div>
                         <div className="col-6">
-                          <input className="form-control" type="text" placeholder="Number Of Tires" {...register("vehicleSpecs.numberOfTires", { valueAsNumber: true })} />
+                          <input className="form-control" type="text" placeholder="Number Of Tires" {...register("vehicleSpec.numberOfTires", { valueAsNumber: true })} />
                         </div>
                       </div>
                     </div>
