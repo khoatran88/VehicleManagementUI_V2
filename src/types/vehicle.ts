@@ -1,5 +1,6 @@
 export interface VehicleVM {
   id?: string
+  lastUpdatedDate?: Date
   plateNumber?: string
   brand?: string
   model?: string
@@ -12,6 +13,7 @@ export interface VehicleVM {
   lifetimeLimitTo?: number
   purchasedDate?: Date
   lastInspectionDate?: Date
+  image?: string
   vehicleSpec?: VehicleSpec
 }
 export interface VehicleSpec{

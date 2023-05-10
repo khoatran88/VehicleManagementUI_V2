@@ -46,6 +46,10 @@ export default class VehicleManager extends Component<
     return await VehicleActions.fetchVehicles(PageNumber, PageSize)
   }
 
+  async fetchAddVehicle(vehicle: VehicleVM) {
+    return await VehicleActions.fetchCreateVehicle(vehicle)
+  }
+
   async fetchVehicleDetail(id: string) {
     this.vehicle = {}
     var rs = await VehicleActions.fetchDetail(id)
@@ -65,6 +69,16 @@ export default class VehicleManager extends Component<
     await this.fetchData(data, this.state.pagnation.pageSize)
   }
 
+  handleShowAddVehicle = () => {
+    this.vehicle = {}
+    this.setShowCreateEdit(true)
+  }
+
+  hanldeAddVehicle = async (value: any) => {
+    await await VehicleActions.fetchCreateVehicle(value.vehicle)
+    this.setShowCreateEdit(false)
+  }
+
   render() {
     const { modalShow } = this.state
     const { pagnation } = this.state
@@ -76,7 +90,7 @@ export default class VehicleManager extends Component<
               <button
                 className="btn btn-primary"
                 type="button"
-                onClick={() => this.setShowCreateEdit(true)}
+                onClick={() => this.handleShowAddVehicle()}
               >
                 Add New
               </button>
@@ -94,6 +108,7 @@ export default class VehicleManager extends Component<
             show={modalShow}
             onHide={() => this.setShowCreateEdit(false)}
             data={this.vehicle}
+            handleAddVehicle={this.hanldeAddVehicle}
           />
         </div>
       </div>

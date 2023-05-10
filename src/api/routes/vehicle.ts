@@ -42,6 +42,3 @@ export const fetchCreateVehicle = async (vehicle: VehicleVM): Promise<Response> 
   return data
 }
 
-// export const fetchCreateVehicle = async (vehicle: VehicleVM): Promise<AxiosResponse<AuthTokens>> => {
-//   return api.post<AuthTokens>(apiUrl.vehicle.createVehicle, {vehicle})
-// }
