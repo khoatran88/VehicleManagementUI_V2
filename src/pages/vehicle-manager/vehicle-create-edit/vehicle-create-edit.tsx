@@ -16,25 +16,22 @@ export default function VehicleCreateEdit({
   data: VehicleVM
   handleAddVehicle: any
 }) {
-  let data1: VehicleVM = data;
 
-  const { setValue, register, handleSubmit, reset } = useForm({
-    defaultValues: data1,
-    resetOptions: {
-      keepDirtyValues: false, // user-interacted input will be retained
-      keepErrors: false, // input errors will be retained with value update
-    }
-  });
+  const { setValue, register, handleSubmit, reset } = useForm();
+  const onSubmit = handleAddVehicle
+  const [test, setTest] = useState(data);
 
   useEffect(() => {
-    data1 = {}
-    reset(data1)
-  }, [data1])
-  //setValue('plateNumber', data.plateNumber);
-  //useEffect(() => setValue(VehicleVM, data), [data])
+    // reset form with user data
+    reset(test);
+  }, [test]);
 
+  useEffect(() => setValue("vehicle", data), [data])
+  const close = () => {
+    reset();
+    onHide()
+  }
 
-  const onSubmit = handleAddVehicle
   return (
     <Modal
       show={show}
@@ -73,7 +70,7 @@ export default function VehicleCreateEdit({
                           <h6>Plate Number:</h6>
                         </div>
                         <div className="col-6">
-                          <input className="form-control" type="text" placeholder="Plate Number" {...register("plateNumber")} />
+                          <input className="form-control" id="plateNumber" type="text" placeholder="Plate Number" {...register("vehicle.plateNumber")} />
                         </div>
                       </div>
                       <div className="row pb-2">
@@ -81,7 +78,7 @@ export default function VehicleCreateEdit({
                           <h6>Brand:</h6>
                         </div>
                         <div className="col-6">
-                          <input className="form-control" type="text" placeholder="Password" {...register("brand")} />
+                          <input className="form-control" type="text" placeholder="Password" {...register("vehicle.brand")} />
                         </div>
                       </div>
                       <div className="row pb-2">
@@ -156,7 +153,7 @@ export default function VehicleCreateEdit({
                           <input className="form-control" type="datetime-local" placeholder="Purchased Date" {...register("purchasedDate")} />
                         </div>
                       </div>
-                      {/* <div className="row pb-2">
+                      <div className="row pb-2">
                         <div className="col-6">
                           <h6>Last Updated Date:</h6>
                         </div>
@@ -171,7 +168,7 @@ export default function VehicleCreateEdit({
                         <div className="col-6">
                           <input className="form-control" type="datetime-local" placeholder="Last Inspection Date" {...register("vehicle.lastInspectionDate")} />
                         </div>
-                      </div> */}
+                      </div>
                       <div className="row pb-2">
                         <div className="col-6">
                           <h6>Image:</h6>
@@ -308,7 +305,7 @@ export default function VehicleCreateEdit({
                       </div>
                     </div>
                     <Modal.Footer>
-                      <button className="btn btn-primary" type="button" onClick={onHide}>
+                      <button className="btn btn-primary" type="button" onClick={close}>
                         Close
                       </button>
                       <button className="btn btn-primary" type="submit">
