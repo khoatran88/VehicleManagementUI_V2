@@ -11,5 +11,6 @@ export const apiUrl = {
     getVehicleDetail: path(BASE_URL, '/Vehicle/GetVehicleById'),
     getVehicles: path(BASE_URL, '/Vehicle/GetAllVehicles'),
     createVehicle: path(BASE_URL, '/Vehicle/CreateVehicle'),
+    editVehicle: path(BASE_URL, '/Vehicle/UpdateVehicle'),
   },
 }

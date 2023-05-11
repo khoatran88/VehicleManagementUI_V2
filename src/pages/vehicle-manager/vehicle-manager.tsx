@@ -46,10 +46,6 @@ export default class VehicleManager extends Component<
     return await VehicleActions.fetchVehicles(PageNumber, PageSize)
   }
 
-  async fetchAddVehicle(vehicle: VehicleVM) {
-    return await VehicleActions.fetchCreateVehicle(vehicle)
-  }
-
   async fetchVehicleDetail(id: string) {
     this.vehicle = {}
     var rs = await VehicleActions.fetchDetail(id)
@@ -75,7 +71,7 @@ export default class VehicleManager extends Component<
   }
 
   hanldeAddVehicle = async (value: any) => {
-    await await VehicleActions.fetchCreateVehicle(value.vehicle)
+    await VehicleActions.createAndEditVehicle(value.vehicle)
     this.setShowCreateEdit(false)
   }
 
