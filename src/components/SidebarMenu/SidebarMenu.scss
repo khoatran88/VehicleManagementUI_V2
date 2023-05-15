@@ -33,6 +33,7 @@
     .dropdown {
       width: 250px;
       ul {
+        font-size: 14px;
         width: 215px;
         li {
           .selectLng {
@@ -40,6 +41,19 @@
             padding-top: 1rem;
             padding-bottom: 0.5rem;
             font-weight: 600;
+          }
+          a {
+            padding: 0.75rem none;
+          }
+          i {
+            color: $primary500 !important;
+          }
+          .unselect {
+            color: $dark200;
+          }
+          .selected {
+            pointer-events: none;
+            background-color: transparent;
           }
         }
       }
