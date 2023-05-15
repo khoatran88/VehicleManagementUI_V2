@@ -78,21 +78,21 @@ const SidebarMenu = () => {
               <li key={code}>
                 <a
                   className={
-                    'dropdown-item d-flex py-3 justify-content-between align-items-center ' +
+                    'dropdown-item d-flex justify-content-between align-items-center' +
                     (i18next.resolvedLanguage !== code
-                      ? 'unselect'
-                      : 'selected')
+                      ? ' unselect'
+                      : ' selected')
                   }
                   onClick={() => {
                     i18next.changeLanguage(code)
                   }}
                 >
-                  <div className="d-flex">
+                  <div className="d-flex align-items-center">
                     <img src={flag} alt="flag" className="ms-2 me-3" />
                     <div>{name}</div>
                   </div>
                   <i
-                    className="bi bi-check fs-4"
+                    className="bi bi-check2 fs-5"
                     hidden={i18next.resolvedLanguage !== code ? true : false}
                   ></i>
                 </a>
