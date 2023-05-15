@@ -8,6 +8,7 @@ import App from './App'
 import reportWebVitals from './reportWebVitals'
 import { AuthProvider } from './context'
 import 'bootstrap/dist/js/bootstrap.bundle.min'
+import 'src/locales'
 
 export const queryClient = new QueryClient()
 

@@ -11,7 +11,6 @@ const SidebarMenuItems = ({
   return (
     <ul className="navbar d-flex flex-column">
       <li
-        // className="nav-item w-100 list-unstyled child"
         className={`nav-item w-100 list-unstyled ${index ? 'child' : ''}`}
       >
         <a
@@ -19,7 +18,7 @@ const SidebarMenuItems = ({
           className="nav-link d-flex justify-content-between"
         >
           <div className="nav-item-content">
-            <i className="bi bi-clipboard-data" />
+            <i className={items.icon} style={{fontSize: '1.25rem'}}/>
             <span className="ms-2">{items.title}</span>
           </div>
         </a>

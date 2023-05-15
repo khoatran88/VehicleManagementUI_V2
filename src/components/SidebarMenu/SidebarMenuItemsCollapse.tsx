@@ -23,7 +23,7 @@ const SidebarMenuItemsCollapse = ({
           onClick={() => setShow(!show)}
         >
           <div className="nav-item-content">
-            <i className="bi bi-clipboard-data" />
+            <i className={items.icon} style={{fontSize: '1.25rem'}}/>
             <span className="ms-2">{items.title}</span>
           </div>
           <div className="dropdown-icon">

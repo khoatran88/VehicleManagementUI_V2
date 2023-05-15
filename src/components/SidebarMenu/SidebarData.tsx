@@ -16,7 +16,7 @@ export const sidebarData: SidebarType[] = [
       {
         title: 'Vehicle Manager',
         path: '/vehicle-mannager',
-        icon: 'bi bi-car-front-fill',
+        icon: 'bi bi-truck',
         disable: true,
       },
     ],

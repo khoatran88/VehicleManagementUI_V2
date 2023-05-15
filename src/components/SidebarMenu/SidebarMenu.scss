@@ -32,6 +32,17 @@
     margin-bottom: 5rem;
     .dropdown {
       width: 250px;
+      ul {
+        width: 215px;
+        li {
+          .selectLng {
+            font-size: 13px;
+            padding-top: 1rem;
+            padding-bottom: 0.5rem;
+            font-weight: 600;
+          }
+        }
+      }
     }
   }
 }
