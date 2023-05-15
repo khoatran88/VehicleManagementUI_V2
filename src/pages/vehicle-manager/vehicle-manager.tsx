@@ -73,6 +73,7 @@ export default class VehicleManager extends Component<
   hanldeAddVehicle = async (value: any) => {
     await VehicleActions.createAndEditVehicle(value.vehicle)
     this.setShowCreateEdit(false)
+    this.componentDidMount()
   }
 
   render() {
@@ -83,29 +84,13 @@ export default class VehicleManager extends Component<
         <div className="col-12">
           <div className="row">
             <div className="col-12">
-              <button
-                className="btn btn-primary"
-                type="button"
-                onClick={() => this.handleShowAddVehicle()}
-              >
-                Add New
-              </button>
+              <button className="btn btn-primary" type="button" onClick={() => this.handleShowAddVehicle()} > Add New </button>
             </div>
             <div className="col-12">
-              <VechicleTable
-                vehicles={this.vehicles}
-                handleEditVehicle={this.editVehicle}
-                handleGetData={this.handleClickPagnation}
-                pagnation={pagnation}
-              />
+              <VechicleTable vehicles={this.vehicles} handleEditVehicle={this.editVehicle} handleGetData={this.handleClickPagnation} pagnation={pagnation} />
             </div>
           </div>
-          <VehicleCreateEdit
-            show={modalShow}
-            onHide={() => this.setShowCreateEdit(false)}
-            data={this.vehicle}
-            handleAddVehicle={this.hanldeAddVehicle}
-          />
+          <VehicleCreateEdit show={modalShow} onHide={() => this.setShowCreateEdit(false)} data={this.vehicle} handleAddVehicle={this.hanldeAddVehicle} />
         </div>
       </div>
     )
