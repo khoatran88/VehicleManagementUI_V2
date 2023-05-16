@@ -7,7 +7,6 @@ import SidebarMenuItems from './SidebarMenuItems'
 import SidebarMenuItemsCollapse from './SidebarMenuItemsCollapse'
 import { useTranslation } from 'react-i18next'
 import i18next from 'i18next'
-import { useMemo } from 'react'
 
 const SidebarMenu = () => {
   const { t } = useTranslation('common')

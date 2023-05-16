@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import './SidebarMenu.scss'
 import { SidebarType } from 'src/types'
-import { removeSpace } from 'src/utils'
+import { removeSlash } from 'src/utils'
 import SidebarMenuItems from './SidebarMenuItems'
 
 const SidebarMenuItemsCollapse = ({
@@ -19,11 +19,11 @@ const SidebarMenuItemsCollapse = ({
           role="presentation"
           className="nav-link d-flex justify-content-between"
           data-bs-toggle="collapse"
-          data-bs-target={`#${removeSpace(items.title!)}`}
+          data-bs-target={`#${removeSlash(items.path!)}`}
           onClick={() => setShow(!show)}
         >
           <div className="nav-item-content">
-            <i className={items.icon} style={{fontSize: '1.25rem'}}/>
+            <i className={items.icon} style={{ fontSize: '1.25rem' }} />
             <span className="ms-2">{items.title}</span>
           </div>
           <div className="dropdown-icon">
@@ -35,7 +35,7 @@ const SidebarMenuItemsCollapse = ({
           </div>
         </div>
       </li>
-      <div className="collapse w-100" id={`${removeSpace(items.title!)}`}>
+      <div className="collapse w-100" id={`${removeSlash(items.path!)}`}>
         {items.child?.map((child) =>
           child.child ? (
             <SidebarMenuItemsCollapse

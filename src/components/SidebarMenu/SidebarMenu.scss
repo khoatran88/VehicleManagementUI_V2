@@ -22,6 +22,10 @@
               background-color: $lightDark200;
             }
           }
+          &-content {
+            display: flex;
+            align-items: center;
+          }
         }
       }
     }
