@@ -54,13 +54,13 @@
               display: flex;
               align-items: center;
             }
-            .unselect {
-              color: $dark200;
-            }
-            .selected {
-              pointer-events: none;
-              background-color: transparent;
-            }
+          }
+          .selected {
+            pointer-events: none;
+            background-color: transparent;
+          }
+          .unselect {
+            color: $dark200;
           }
         }
       }

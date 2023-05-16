@@ -1,4 +1,3 @@
-import './SidebarMenu.scss'
 import { SidebarType } from 'src/types'
 
 const SidebarMenuItems = ({
