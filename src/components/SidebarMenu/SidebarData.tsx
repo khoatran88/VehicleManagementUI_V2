@@ -1,34 +1,20 @@
 import { SidebarType } from 'src/types'
-import { Translation } from 'react-i18next'
 
 export const sidebarData: SidebarType[] = [
   {
-    // title: 'Dashboard',
-    title: (
-      <Translation ns="sidebar">
-        {(t) => <span>{t('dashboard')}</span>}
-      </Translation>
-    ),
+    title: 'dashboard',
     path: '/dashboard',
     icon: 'bi bi-clipboard-data',
     disable: false,
   },
   {
-    title: (
-      <Translation ns="sidebar">
-        {(t) => <span>{t('vehicle')}</span>}
-      </Translation>
-    ),
+    title: 'vehicle',
     path: '/vehicle',
     icon: 'bi bi-car-front-fill',
     disable: false,
     child: [
       {
-        title: (
-          <Translation ns="sidebar">
-            {(t) => <span>{t('vehicle-manager')}</span>}
-          </Translation>
-        ),
+        title: 'vehicle-manager',
         path: '/vehicle-manager',
         icon: 'bi bi-truck',
         disable: true,

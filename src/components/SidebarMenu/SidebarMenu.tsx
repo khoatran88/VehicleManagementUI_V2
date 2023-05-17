@@ -7,6 +7,8 @@ import SidebarMenuItems from './SidebarMenuItems'
 import SidebarMenuItemsCollapse from './SidebarMenuItemsCollapse'
 import { useTranslation } from 'react-i18next'
 import i18next from 'i18next'
+import { useEffect, useState } from 'react'
+import { useLocalStorageState } from 'src/hooks'
 
 const SidebarMenu = () => {
   const { t } = useTranslation('common')
@@ -27,6 +29,32 @@ const SidebarMenu = () => {
     (item) => item.code === i18next.resolvedLanguage
   )
 
+  const [data, setData] = useState(sidebarData)
+
+  const [storedSidebarData, setStoredSidebarData] = useLocalStorageState(
+    'sidebarData',
+    sidebarData
+  )
+  useEffect(() => {
+    if (!storedSidebarData) {
+      setStoredSidebarData(sidebarData)
+    }
+  }, [setStoredSidebarData])
+
+  const handleSidebarItemClick = () => {
+    const updatedData = data.map((item) => {
+      if (item.child) {
+        return {
+          ...item,
+          isActive: !item.isActive,
+        }
+      }
+      return item
+    })
+    setData(updatedData)
+    localStorage.setItem('sidebarData', JSON.stringify(updatedData))
+  }
+
   return (
     <div className="sidebar min-vh-100 d-flex flex-column">
       <div className="sidebar-header d-flex align-items-center justify-content-center mb-3 py-2">
@@ -35,12 +63,13 @@ const SidebarMenu = () => {
         </a>
       </div>
       <div className="sidebar-content">
-        {sidebarData.map((items, index) =>
+        {storedSidebarData.map((items: any, index: number) =>
           items.child ? (
             <SidebarMenuItemsCollapse
               items={items}
               key={items.path}
               index={index}
+              onClick={handleSidebarItemClick}
             />
           ) : (
             <SidebarMenuItems items={items} key={items.path} index={index} />
