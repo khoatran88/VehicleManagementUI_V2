@@ -19,7 +19,7 @@ const SidebarMenuItems = ({
         >
           <div className="nav-item-content">
             <i className={items.icon} style={{ fontSize: '1.25rem' }} />
-            <span className="ms-2">{t(items.title)}</span>
+            <span className="ms-2">{items.title}</span>
           </div>
         </a>
       </li>

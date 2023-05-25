@@ -8,7 +8,7 @@
     .navbar {
       padding: 0;
       margin: 0;
-      &:hover {
+      &:hover, &:active {
         background-color: $lightDark100;
       }
       .nav {
@@ -29,6 +29,9 @@
         }
       }
     }
+  }
+  .search-box {
+    width: 250px;
   }
   &-footer {
     display: flex;

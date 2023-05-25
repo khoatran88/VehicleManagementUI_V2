@@ -7,42 +7,72 @@ import SidebarMenuItems from './SidebarMenuItems'
 import SidebarMenuItemsCollapse from './SidebarMenuItemsCollapse'
 import { useTranslation } from 'react-i18next'
 import i18next from 'i18next'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useLocalStorageState } from 'src/hooks'
 
 const SidebarMenu = () => {
-  const { t } = useTranslation('common')
+  const { t } = useTranslation(['sidebar', 'common'])
   const languages = [
     {
       code: 'vn',
-      name: t('common.vn'),
+      name: t('common:common.vn'),
       flag: vnFlag,
     },
     {
       code: 'en',
-      name: t('common.en'),
+      name: t('common:common.en'),
       flag: ukFlag,
     },
   ]
 
-  const renderLangBtn = languages.find(
-    (item) => item.code === i18next.resolvedLanguage
-  )
+  const [searchText, setSearchText] = useState('')
+  const searchInputRef = useRef<HTMLInputElement>(null)
+  const languageCode = localStorage.getItem('i18nextLng')
+  const [translatedData, setTranslatedData] = useState<any[]>([])
 
-  const [data, setData] = useState(sidebarData)
+  const renderLangBtn = languages.find((item) => item.code === languageCode)
+  const handleSearchInputChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setSearchText(event.target.value)
+  }
 
   const [storedSidebarData, setStoredSidebarData] = useLocalStorageState(
     'sidebarData',
     sidebarData
   )
+
+  useEffect(() => {
+    if (searchInputRef.current) {
+      searchInputRef.current.focus()
+    }
+  }, [])
+
+  const translateSidebar = (sidebar: any) => {
+    return sidebar.map((item: any) => {
+      if (item.child) {
+        return {
+          ...item,
+          title: t(item.title),
+          child: translateSidebar(item.child),
+        }
+      }
+      return {
+        ...item,
+        title: t(item.title),
+      }
+    })
+  }
+
   useEffect(() => {
     if (!storedSidebarData) {
-      setStoredSidebarData(sidebarData)
+      setTranslatedData(translateSidebar(sidebarData))
+      setStoredSidebarData(translatedData)
     }
   }, [setStoredSidebarData])
 
   const handleSidebarItemClick = () => {
-    const updatedData = data.map((item) => {
+    const updatedData = storedSidebarData.map((item: any) => {
       if (item.child) {
         return {
           ...item,
@@ -51,9 +81,13 @@ const SidebarMenu = () => {
       }
       return item
     })
-    setData(updatedData)
-    localStorage.setItem('sidebarData', JSON.stringify(updatedData))
+    setStoredSidebarData(updatedData)
+    console.log('updatedData', updatedData)
   }
+
+  const filteredData = storedSidebarData.filter((item: any) =>
+    item.title.toLowerCase().includes(searchText.toLowerCase())
+  )
 
   return (
     <div className="sidebar min-vh-100 d-flex flex-column">
@@ -62,8 +96,23 @@ const SidebarMenu = () => {
           <img src={logo1} alt="LOGO" />
         </a>
       </div>
+      <div className="d-flex align-items-center justify-content-center">
+        <div className="input-group my-3 search-box">
+          <input
+            type="text"
+            className="form-control shadow-none"
+            placeholder={t('common:common.search') ?? ''}
+            value={searchText}
+            onChange={handleSearchInputChange}
+            ref={searchInputRef}
+          />
+          <span className="input-group-text">
+            <i className="bi bi-search"></i>
+          </span>
+        </div>
+      </div>
       <div className="sidebar-content">
-        {storedSidebarData.map((items: any, index: number) =>
+        {filteredData.map((items: any, index: number) =>
           items.child ? (
             <SidebarMenuItemsCollapse
               items={items}
@@ -90,7 +139,7 @@ const SidebarMenu = () => {
                   <img src={renderLangBtn.flag} alt="lang" />
                 </div>
                 <div className="button-text ps-3">
-                  <div className="text">{t('common.language')}</div>
+                  <div className="text">{t('common:common.language')}</div>
                   <div className="selected-lang">{renderLangBtn.name}</div>
                 </div>
               </div>
@@ -99,7 +148,7 @@ const SidebarMenu = () => {
           <ul className="dropdown-menu p-0 dropdown-menu-end">
             <li>
               <span className="dropdown-item-text selectLng">
-                {t('common.selectLng')}
+                {t('common:common.selectLng')}
               </span>
             </li>
             {languages.map(({ code, name, flag }) => (

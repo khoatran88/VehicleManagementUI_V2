@@ -1,9 +1,8 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './SidebarMenu.scss'
 import { SidebarType } from 'src/types'
 import { removeSlash } from 'src/utils'
 import SidebarMenuItems from './SidebarMenuItems'
-import { useTranslation } from 'react-i18next'
 
 const SidebarMenuItemsCollapse = ({
   items,
@@ -14,8 +13,6 @@ const SidebarMenuItemsCollapse = ({
   index: number
   onClick: (path: string) => void
 }) => {
-  const { t } = useTranslation('sidebar')
-
   const [show, setShow] = useState(items.isActive || false)
 
   const handleCollapseToggle = () => {
@@ -24,6 +21,12 @@ const SidebarMenuItemsCollapse = ({
       onClick(items.path)
     }
   }
+
+  useEffect(() => {
+    if (items.child && items.isActive) {
+      setShow(items.isActive)
+    }
+  }, [show])
 
   return (
     <ul className="navbar d-flex flex-column">
@@ -37,7 +40,7 @@ const SidebarMenuItemsCollapse = ({
         >
           <div className="nav-item-content">
             <i className={items.icon} style={{ fontSize: '1.25rem' }} />
-            <span className="ms-2">{t(items.title)}</span>
+            <span className="ms-2">{items.title}</span>
           </div>
           <div className="dropdown-icon">
             {show ? (

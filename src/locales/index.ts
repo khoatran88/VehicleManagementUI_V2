@@ -13,7 +13,7 @@ i18n
   .use(LanguageDetector)
   .use(initReactI18next)
   .init({
-    ns: ['common'],
+    ns: ['common, sidebar'],
     defaultNS: 'common',
     debug: true,
     lng: 'en',
