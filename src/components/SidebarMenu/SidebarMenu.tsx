@@ -14,7 +14,7 @@ const SidebarMenu = () => {
   const { t } = useTranslation(['sidebar', 'common'])
   const languages = [
     {
-      code: 'vn',
+      code: 'vi',
       name: t('common:common.vn'),
       flag: vnFlag,
     },
@@ -28,7 +28,6 @@ const SidebarMenu = () => {
   const [searchText, setSearchText] = useState('')
   const searchInputRef = useRef<HTMLInputElement>(null)
   const languageCode = localStorage.getItem('i18nextLng')
-  const [translatedData, setTranslatedData] = useState<any[]>([])
 
   const renderLangBtn = languages.find((item) => item.code === languageCode)
   const handleSearchInputChange = (
@@ -39,12 +38,19 @@ const SidebarMenu = () => {
 
   const [storedSidebarData, setStoredSidebarData] = useLocalStorageState(
     'sidebarData',
-    sidebarData
+    []
   )
 
   useEffect(() => {
     if (searchInputRef.current) {
       searchInputRef.current.focus()
+    }
+  }, [])
+
+  useEffect(() => {
+    if (storedSidebarData.length === 0) {
+      const translatedSidebarData = translateSidebar(sidebarData)
+      setStoredSidebarData(translatedSidebarData)
     }
   }, [])
 
@@ -64,13 +70,6 @@ const SidebarMenu = () => {
     })
   }
 
-  useEffect(() => {
-    if (!storedSidebarData) {
-      setTranslatedData(translateSidebar(sidebarData))
-      setStoredSidebarData(translatedData)
-    }
-  }, [setStoredSidebarData])
-
   const handleSidebarItemClick = () => {
     const updatedData = storedSidebarData.map((item: any) => {
       if (item.child) {
@@ -82,12 +81,17 @@ const SidebarMenu = () => {
       return item
     })
     setStoredSidebarData(updatedData)
-    console.log('updatedData', updatedData)
   }
 
   const filteredData = storedSidebarData.filter((item: any) =>
     item.title.toLowerCase().includes(searchText.toLowerCase())
   )
+
+  const onChangeLang = (code: string) => {
+    i18next.changeLanguage(code)
+    const translatedSidebarData = translateSidebar(sidebarData)
+    setStoredSidebarData(translatedSidebarData)
+  }
 
   return (
     <div className="sidebar min-vh-100 d-flex flex-column">
@@ -161,7 +165,7 @@ const SidebarMenu = () => {
                       : ' selected')
                   }
                   onClick={() => {
-                    i18next.changeLanguage(code)
+                    onChangeLang(code)
                   }}
                 >
                   <div className="d-flex align-items-center">

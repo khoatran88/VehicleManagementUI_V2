@@ -1,22 +1,16 @@
 import i18n from 'i18next'
 import LanguageDetector from 'i18next-browser-languagedetector'
 import { initReactI18next } from 'react-i18next'
-import resourcesToBackend from 'i18next-resources-to-backend'
+import Backend from 'i18next-http-backend'
 
 i18n
-  .use(
-    resourcesToBackend(
-      (language: any, namespace: any) =>
-        import(`./${language}/${namespace}.json`)
-    )
-  )
+  .use(Backend)
   .use(LanguageDetector)
   .use(initReactI18next)
   .init({
-    ns: ['common, sidebar'],
+    ns: ['common', 'sidebar'],
     defaultNS: 'common',
     debug: true,
-    lng: 'en',
     fallbackLng: 'en',
     interpolation: {
       escapeValue: false,
