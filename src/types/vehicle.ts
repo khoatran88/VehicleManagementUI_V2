@@ -14,7 +14,7 @@ export interface VehicleVM {
   purchasedDate?: Date
   lastInspectionDate?: Date
   image?: string
-  vehicleSpec?: VehicleSpec
+  vehicleSpecs?: VehicleSpec
 }
 export interface VehicleSpec{
   id?: string

@@ -1,0 +1,1 @@
+export { default as VehicleDetail } from './vehicle-detail'

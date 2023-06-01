@@ -1,7 +1,8 @@
-import { useState } from 'react'
 import { PaginationControl } from 'react-bootstrap-pagination-control'
+import { BrowserRouter, Link, Route, Routes } from 'react-router-dom'
 import { VehicleVM } from 'src/types'
-import { PagedResponse, Pagnation } from 'src/types/response'
+import { Pagnation } from 'src/types/response'
+import { VehicleDetail } from '../vehicle-detail'
 
 export default function VechicleTable({
   handleEditVehicle,
@@ -35,13 +36,14 @@ export default function VechicleTable({
               <th scope="col">Type</th>
               <th scope="col">Production Year</th>
               <th scope="col">Life Time Limit To</th>
-              <th scope="col">Action</th>
             </tr>
           </thead>
           <tbody>
             {vehicles.map((data) => (
               <tr key={data.id}>
-                <td>{data.plateNumber}</td>
+                <td>
+                  <Link className="text-decoration-none text-dark" to={`/vehicle-detail/${data.id}`}>{data.plateNumber}</Link>
+                </td>
                 <td>{data.brand}</td>
                 <td>{data.model}</td>
                 <td>{data.engineNumber}</td>
@@ -50,15 +52,6 @@ export default function VechicleTable({
                 <td>{data.type}</td>
                 <td>{data.productionYear}</td>
                 <td>{data.lifetimeLimitTo}</td>
-                <td>
-                  <button
-                    type="button"
-                    className="btn btn-primary pl-5"
-                    onClick={() => editVehicle(data.id!)}
-                  >
-                    Edit Vehicle
-                  </button>
-                </td>
               </tr>
             ))}
           </tbody>

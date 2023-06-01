@@ -70,10 +70,10 @@ export default class VehicleManager extends Component<
     this.setShowCreateEdit(true)
   }
 
-  hanldeAddVehicle = async (value: any) => {
+  hanldeAddEditVehicle = async (value: any) => {
     await VehicleActions.createAndEditVehicle(value.vehicle)
     this.setShowCreateEdit(false)
-    this.componentDidMount()
+    await this.fetchData(this.state.pagnation.pageNumber, this.state.pagnation.pageSize)
   }
 
   render() {
@@ -83,14 +83,19 @@ export default class VehicleManager extends Component<
       <div className="row">
         <div className="col-12">
           <div className="row">
-            <div className="col-12">
+            <div className="d-flex justify-content-between">
               <button className="btn btn-primary" type="button" onClick={() => this.handleShowAddVehicle()} > Add New </button>
+              <div className=''>
+                <div className="input-group rounded">
+                  <input type="search" className="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+                </div>
+              </div>
             </div>
             <div className="col-12">
               <VechicleTable vehicles={this.vehicles} handleEditVehicle={this.editVehicle} handleGetData={this.handleClickPagnation} pagnation={pagnation} />
             </div>
           </div>
-          <VehicleCreateEdit show={modalShow} onHide={() => this.setShowCreateEdit(false)} data={this.vehicle} handleAddVehicle={this.hanldeAddVehicle} />
+          <VehicleCreateEdit show={modalShow} onHide={() => this.setShowCreateEdit(false)} data={this.vehicle} handleAddEditVehicle={this.hanldeAddEditVehicle} />
         </div>
       </div>
     )

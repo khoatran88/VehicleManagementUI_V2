@@ -8,16 +8,16 @@ export default function VehicleCreateEdit({
   show,
   onHide,
   data,
-  handleAddVehicle
+  handleAddEditVehicle
 }: {
   show: boolean
   onHide: any
   data: VehicleVM
-  handleAddVehicle: any
+  handleAddEditVehicle?: any
 }) {
 
   const { setValue, register, handleSubmit, reset } = useForm();
-  const onSubmit = handleAddVehicle
+  const onSubmit = handleAddEditVehicle
   const [processData, setprocessData] = useState(data);
 
   useEffect(() => {
@@ -27,9 +27,10 @@ export default function VehicleCreateEdit({
 
   useEffect(() => setValue("vehicle", data), [data])
   const close = () => {
-    reset();
     onHide()
   }
+
+  console.log(data)
 
   return (
     <Modal show={show} size="lg" aria-labelledby="contained-modal-title-vcenter" centered>
@@ -86,7 +87,7 @@ export default function VehicleCreateEdit({
                           <h6>Engine Number:</h6>
                         </div>
                         <div className="col-6">
-                          <input className="form-control" type="number" placeholder="Engine Number" {...register("vehicle.engineNumber")} />
+                          <input className="form-control" type="text" placeholder="Engine Number" {...register("vehicle.engineNumber")} />
                         </div>
                       </div>
                       <div className="row pb-2">
@@ -166,7 +167,7 @@ export default function VehicleCreateEdit({
                           <h6>Image:</h6>
                         </div>
                         <div className="col-6">
-                          <input className="form-control" type="file" placeholder="Image" {...register("vehicle.image")} />
+                          <input className="form-control" type="text" placeholder="Image" {...register("vehicle.image")} />
                         </div>
                       </div>
                     </div>
